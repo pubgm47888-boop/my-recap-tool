@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Movie Recap - Myanmar One-Click Studio v8.5</title>
+    <title>AI Movie Recap - Myanmar One-Click Studio v8.6</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -43,7 +43,7 @@
             </div>
             <div>
                 <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
-                    AI Movie Recap <span class="bg-amber-500/10 text-amber-400 text-xs px-2 py-0.5 rounded border border-amber-500/20 font-medium">Web Studio v8.5</span>
+                    AI Movie Recap <span class="bg-amber-500/10 text-amber-400 text-xs px-2 py-0.5 rounded border border-amber-500/20 font-medium">Web Studio v8.6</span>
                 </h1>
                 <p class="text-xs text-gray-400">Client-Side Engine - ဖုန်းဖြင့် စာတန်းထိုး Masking၊ AI မြန်မာဘာသာပြန် ဇာတ်လမ်းပြောနှင့် Perfect Sync အသံစနစ်များကို တိုက်ရိုက်လုပ်ဆောင်နိုင်သောစနစ်</p>
             </div>
@@ -84,20 +84,23 @@
                     <span id="video-timer" class="text-xs font-mono text-amber-400">00:00.0 / 00:00.0</span>
                 </div>
                 
-                <div class="relative bg-black flex items-center justify-center p-4 min-h-[350px]">
+                <div class="relative bg-black flex flex-col items-center justify-center p-4 min-h-[350px]">
                     <div id="canvas-wrapper" class="canvas-container relative max-w-full max-h-[500px] flex items-center justify-center">
                         <canvas id="editor-canvas" class="rounded-lg shadow-2xl bg-gray-950 object-contain"></canvas>
                     </div>
                     
                     <video id="core-video" class="hidden" crossorigin="anonymous"></video>
                     
-                    <div id="upload-placeholder" class="absolute inset-0 flex flex-col items-center justify-center bg-gray-950/90 border-2 border-dashed border-gray-700 m-4 rounded-xl cursor-pointer hover:border-amber-500 transition-all duration-300 z-10">
-                        <div class="bg-gray-900 p-5 rounded-full mb-3 text-gray-400 group-hover:text-amber-500 transition-colors">
-                            <i class="fa-solid fa-video-camera text-4xl"></i>
+                    <div id="upload-placeholder" class="absolute inset-0 flex flex-col items-center justify-center bg-gray-950/90 border-2 border-dashed border-gray-700 m-4 rounded-xl p-6 transition-all duration-300 z-10">
+                        <div class="bg-gray-900 p-4 rounded-full mb-2 text-gray-400">
+                            <i class="fa-solid fa-video-camera text-3xl"></i>
                         </div>
-                        <p class="font-medium text-sm text-gray-200">ဤနေရာတွင် သင်၏ Movie Recap ဗီဒီယိုကို ထည့်ပါ</p>
-                        <p class="text-xs text-gray-500 mt-1">နှိပ်၍လည်း ဗီဒီယိုဖိုင် ရွေးချယ်တင်သွင်းနိုင်ပါသည်။</p>
-                        <input type="file" id="video-uploader" accept="video/*" class="hidden">
+                        <p class="font-medium text-xs text-gray-200 text-center">ဤနေရာတွင် သင်၏ Movie Recap ဗီဒီယိုကို ထည့်ပါ</p>
+                        
+                        <label class="mt-4 px-5 py-2.5 bg-amber-500 text-black text-xs font-bold rounded-xl cursor-pointer shadow-lg hover:bg-amber-600 active:scale-95 transition-all text-center">
+                            <i class="fa-solid fa-file-video mr-1"></i> ဗီဒီယိုဖိုင် ရွေးချယ်မည်
+                            <input type="file" id="video-uploader" accept="video/*" class="hidden">
+                        </label>
                     </div>
                 </div>
 
@@ -128,7 +131,7 @@
 
             <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 shadow-xl space-y-6">
                 <h3 class="text-sm font-semibold text-white border-b border-gray-800 pb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-sliders text-amber-500"></i> Subtitle, Masking & Logo Setup
+                    <i class="fa-solid fa-palette text-amber-500"></i> Subtitle, Masking & Logo Setup
                 </h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -148,7 +151,7 @@
                                 <label class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Blur Bar Background Color (ဖုံးကွယ်မည့်အရောင်)</label>
                                 <select id="mask-color" class="w-full bg-gray-900 border border-gray-800 p-2 rounded-lg text-xs text-white outline-none focus:border-amber-500">
                                     <option value="#000000" selected>Black (အနက်ရောင်)</option>
-                                    <option value="#1e293b">Dark Slate Gray (မီးခိုးရင့်ရောင်)</option>
+                                    <option value="#1e293b">Dark Slate Gray (မီးخိုးရင့်ရောင်)</option>
                                     <option value="#0f172a">Midnight Deep Blue (နက်ပြာရောင်)</option>
                                 </select>
                             </div>
@@ -195,7 +198,7 @@
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
                             <label class="text-xs font-semibold text-gray-300 flex items-center gap-1.5">
-                                <i class="fa-solid fa-palette text-blue-400"></i> Subtitle Color & Logo Settings
+                                <i class="fa-solid fa-circle-check text-blue-400"></i> Subtitle Color & Logo Settings
                             </label>
                             <div class="relative inline-flex items-center cursor-pointer">
                                 <input type="checkbox" id="logo-enable" class="sr-only peer">
@@ -296,7 +299,7 @@
                         <input id="mute-original-audio-toggle" type="checkbox" class="w-4 h-4 text-amber-500 bg-gray-900 border-gray-800 rounded focus:ring-amber-500 accent-amber-500" checked>
                     </div>
                     <div class="ml-2 text-xs">
-                        <label for="mute-original-audio-toggle" class="font-medium text-gray-200">မူရင်းဗီဒီယိုအသ0ံကို ပိတ်မည် (Mute Original Audio)</label>
+                        <label for="mute-original-audio-toggle" class="font-medium text-gray-200">မူရင်းဗီဒီယိုအသံကို ပိတ်မည် (Mute Original Audio)</label>
                     </div>
                 </div>
 
@@ -389,8 +392,6 @@
     <script>
         let videoFile = null;
         let timelineSegments = [];
-        let audioContext = null;
-        let originalVideoNode = null;
 
         const coreVideo = document.getElementById('core-video');
         const editorCanvas = document.getElementById('editor-canvas');
@@ -409,7 +410,6 @@
         
         const subSize = document.getElementById('sub-size');
         const subColor = document.getElementById('sub-color');
-        const duckVolume = document.getElementById('duck-volume');
         const muteOriginalAudioToggle = document.getElementById('mute-original-audio-toggle');
 
         const presetSize = document.getElementById('preset-size');
@@ -426,7 +426,6 @@
         const maskXVal = document.getElementById('mask-x-val');
         const maskWVal = document.getElementById('mask-w-val');
         const subSizeVal = document.getElementById('sub-size-val');
-        const duckVolVal = document.getElementById('duck-vol-val');
         const videoTimer = document.getElementById('video-timer');
         const currentTimeLbl = document.getElementById('current-time-lbl');
         const totalDurationLbl = document.getElementById('total-duration-lbl');
@@ -435,7 +434,6 @@
         const btnStop = document.getElementById('btn-stop');
         const timelineSlider = document.getElementById('timeline-slider');
         const volumeSlider = document.getElementById('volume-slider');
-        const btnMute = document.getElementById('btn-mute');
 
         const segmentContainer = document.getElementById('segment-container');
         const btnAddSegment = document.getElementById('btn-add-segment');
@@ -479,17 +477,16 @@
                 canvasWrapper.style.aspectRatio = "16/9"; canvasWrapper.style.width = "100%";
             } else if (aspect === 'tiktok') {
                 height = Math.round(res * (16 / 9)); width = res;
-                canvasWrapper.style.aspectRatio = "9/16"; canvasWrapper.style.height = "450px";
+                canvasWrapper.style.aspectRatio = "9/16"; canvasWrapper.style.height = "400px";
             } else {
                 height = res; width = res;
-                canvasWrapper.style.aspectRatio = "1/1"; canvasWrapper.style.height = "400px";
+                canvasWrapper.style.aspectRatio = "1/1"; canvasWrapper.style.height = "350px";
             }
             editorCanvas.width = width; editorCanvas.height = height;
             drawCanvasFrame();
         }
 
         function initEvents() {
-            uploadPlaceholder.addEventListener('click', () => videoUploader.click());
             videoUploader.addEventListener('change', (e) => { if(e.target.files.length) processVideoFile(e.target.files[0]); });
             
             btnPlayPause.addEventListener('click', () => { if(coreVideo.paused) coreVideo.play(); else coreVideo.pause(); });
@@ -612,136 +609,4 @@
             const start = timelineSegments.length * 5;
             const end = start + 5;
             const seg = { id: Date.now(), start: start, end: end, text: "မြန်မာစာတန်းထိုး ထည့်ရန်" };
-            timelineSegments.push(seg);
-            renderSegmentsUI();
-        }
-
-        function renderSegmentsUI() {
-            const notice = document.getElementById('empty-state-notice');
-            if(timelineSegments.length > 0) notice.classList.add('hidden'); else notice.classList.remove('hidden');
-            
-            segmentContainer.innerHTML = "";
-            timelineSegments.sort((a,b) => a.start - b.start).forEach((s, idx) => {
-                const div = document.createElement('div');
-                div.className = "bg-gray-900 border border-gray-800 p-3 rounded-xl space-y-2";
-                div.innerHTML = `
-                    <div class="flex items-center justify-between text-[11px] text-gray-400">
-                        <span>Segment #${idx+1}</span>
-                        <div class="flex items-center space-x-1">
-                            <input type="number" step="0.1" value="${s.start}" class="w-12 bg-gray-950 border border-gray-800 p-0.5 rounded text-center text-amber-400" onchange="updateSegTime(${s.id}, 'start', this.value)"> s မှ
-                            <input type="number" step="0.1" value="${s.end}" class="w-12 bg-gray-950 border border-gray-800 p-0.5 rounded text-center text-amber-400" onchange="updateSegTime(${s.id}, 'end', this.value)"> s အထိ
-                        </div>
-                        <button class="text-red-400 hover:text-red-300" onclick="removeSegment(${s.id})"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                    <textarea class="w-full bg-gray-950 border border-gray-800 rounded p-1.5 text-xs text-white outline-none focus:border-amber-500" rows="1" oninput="updateSegText(${s.id}, this.value)">${s.text}</textarea>
-                `;
-                segmentContainer.appendChild(div);
-            });
-        }
-
-        window.updateSegTime = (id, field, val) => {
-            const s = timelineSegments.find(x => x.id === id);
-            if(s) s[field] = parseFloat(val);
-            drawCanvasFrame();
-        };
-
-        window.updateSegText = (id, val) => {
-            const s = timelineSegments.find(x => x.id === id);
-            if(s) s.text = val;
-            drawCanvasFrame();
-        };
-
-        window.removeSegment = (id) => {
-            timelineSegments = timelineSegments.filter(x => x.id !== id);
-            renderSegmentsUI();
-            drawCanvasFrame();
-        };
-
-        // 🚀 ONE-CLICK AI INTEGRATED WORKFLOW
-        async doOneClickAIWorkflow() {
-            if(!videoFile) { showToast("သတိပေးချက်", "ဗီဒီယိုဖိုင် အရင်ထည့်ပေးပါဗျာ။", "error"); return; }
-            
-            const gKey = document.getElementById('api-gemini').value.trim();
-            const qKey = document.getElementById('api-groq').value.trim();
-            if(!gKey || !qKey) { showToast("သတိပေးချက်", "API Keys များ ပြည့်စုံစွာ ဖြည့်သွင်းပေးပါဦးဗျာ။", "error"); return; }
-
-            showProgress("AI Transcribe Pro", "ဗီဒီယိုထဲမှ အသံလှိုင်းများကို ဖတ်ယူပြီး စာသားပြောင်းလဲနေပါသည် (Whisper-Large)...");
-
-            try {
-                // အဆင့် (၁) - မူရင်းဗီဒီယိုထဲက အင်္ဂလိပ်စာသားကို ရယူရန် ဟန်ဆောင်နမူနာဖတ်ခြင်း (သို့မဟုတ် Mock Whisper)
-                // ကန့်သတ်ချက်များကြောင့် Frontend တွင် စကားသံကို Mock Text အဖြစ် အော်တိုဖတ်ပေးမည်
-                const baseScript = "The dynamic action movie starts with a high-speed car chase inside the city center. The hero tries to escape from enemies.";
-
-                showProgress("AI Movie Recap Studio", "Gemini 2.5 AI စနစ်ဖြင့် ဇာတ်လမ်းကို မြန်မာလို အချိတ်အဆက်မိမိ ဘာသာပြန်နေပါသည်...");
-                
-                const style_prompt = document.getElementById('story-style').value;
-                const voice = document.getElementById('voice-selector').value;
-
-                // Gemini API Call (Direct Client-Side Execution)
-                const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${gKey}`;
-                const prompt = `Act as a movie recap storyteller. Style: ${style_prompt}. Translate and create an exciting continuous Burmese narration script for: "${baseScript}". Rules: Use endings like '...ခဲ့တာ ဖြစ်ပါတယ်ဗျာ'၊ '...ခဲ့တာပါ'။ အသံထွက်ဖတ်ရလွယ်ကူအောင် အပိုင်း ၃ ပိုင်း ခွဲပေးပါ။ Format ရလဒ်ကို JSON array ပုံစံမျိုး သာပေးပါ: [{"start": 0, "end": 4, "text": "မြန်မာစာသား"}, ...]`;
-
-                const res = await fetch(geminiUrl, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-                });
-                const data = await res.json();
-                const aiText = data.candidates[0].content.parts[0].text;
-                
-                // Extract JSON Blocks from response
-                const jsonMatch = aiText.match(/\[[\s\S]*\]/);
-                if (jsonMatch) {
-                    timelineSegments = JSON.parse(jsonMatch[0]);
-                    // Auto mapping ids
-                    timelineSegments.forEach(s => s.id = Date.now() + Math.random());
-                } else {
-                    // Fallback segments
-                    timelineSegments = [
-                        { id: 1, start: 0, end: 4, text: "ဇာတ်လမ်းအစမှာတော့ မြို့လယ်ခေါင် ကားမောင်းနှင်မှုနဲ့ စတင်ခဲ့တာပါဗျာ" },
-                        { id: 2, start: 4, end: 9, text: "မင်းသားကတော့ ရန်သူတွေကြားထဲကနေ အသည်းအသန် ထွက်ပြေးနေခဲ့တာ ဖြစ်ပါတယ်" }
-                    ];
-                }
-
-                showProgress("AI Voice Engine", "Edge-TTS စနစ်ဖြင့် AI မြန်မာနောက်ခံအသံဖိုင်များကို Perfect Sync တည်ဆောက်နေပါသည်...");
-                
-                // Edge TTS Voice Simulation & Sound System Pre-setup
-                if(muteOriginalAudioToggle.checked) coreVideo.muted = true;
-                
-                hideProgress();
-                renderSegmentsUI();
-                showToast("ပြီးပြည့်စုံပါပြီ", "မြန်မာလို ဇာတ်ကြောင်းပြောနှင့် စာတန်းထိုးများကို Perfect Sync ချိန်ညှိပြီးပါပြီ။", "success");
-                
-            } catch (err) {
-                hideProgress();
-                showToast("Error", "AI Processing လုပ်ဆောင်ရာတွင် အဆင်မပြေဖြစ်ပွားခဲ့ပါသည်- " + err.message, "error");
-            }
-        }
-
-        function runOneClickAIWorkflow() {
-            doOneClickAIWorkflow();
-        }
-
-        function exportFinalRecapVideo() {
-            if(!videoFile) { showToast("သတိပေးချက်", "ထုတ်ယူရန် ဗီဒီယိုဖိုင် မရှိသေးပါ", "error"); return; }
-            showProgress("Movie Export Studio", "ဗီဒီယို၊ စာတန်းထိုး၊ Masking နှင့် နောက်ခံအသံများကို ပေါင်းစပ်ပြီး ဗီဒီယိုအဖြစ် ထုတ်ယူနေပါသည်...");
-            
-            setTimeout(() => {
-                hideProgress();
-                // Play inside Preview Modal
-                renderedPreviewVideo.src = coreVideo.src;
-                previewModal.classList.remove('hidden');
-                
-                btnFinalDownload.onclick = () => {
-                    const link = document.createElement('a');
-                    link.href = coreVideo.src;
-                    link.download = `recap_exported_${presetSize.value}.mp4`;
-                    link.click();
-                    showToast("အောင်မြင်သည်", "ဗီဒီယိုကို စက်ထဲသို့ အောင်မြင်စွာ သိမ်းဆည်းပြီးပါပြီဗျာ။", "success");
-                };
-            }, 3000);
-        }
-
-        document.addEventListener('DOMContentLoaded', initEvents);
-    </script>
-</body>
-</html>
+            timelineSegments.push
