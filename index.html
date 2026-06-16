@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Movie Recap - Myanmar One-Click Studio v8.6</title>
+    <title>AI Movie Recap - Myanmar One-Click Studio v8.2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -43,15 +43,15 @@
             </div>
             <div>
                 <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
-                    AI Movie Recap <span class="bg-amber-500/10 text-amber-400 text-xs px-2 py-0.5 rounded border border-amber-500/20 font-medium">Web Studio v8.6</span>
+                    AI Movie Recap <span class="bg-amber-500/10 text-amber-400 text-xs px-2 py-0.5 rounded border border-amber-500/20 font-medium">One-Click Auto Pro v8.2</span>
                 </h1>
-                <p class="text-xs text-gray-400">Client-Side Engine - ဖုန်းဖြင့် စာတန်းထိုး Masking၊ AI မြန်မာဘာသာပြန် ဇာတ်လမ်းပြောနှင့် Perfect Sync အသံစနစ်များကို တိုက်ရိုက်လုပ်ဆောင်နိုင်သောစနစ်</p>
+                <p class="text-xs text-gray-400">စာတန်းထိုး တစ်ကြောင်းချင်းစနစ်၊ အရောင်ရွေးချယ်မှုများနှင့် ဗီဒီယိုတင်စနစ် အမှားပြင်ဆင်ပြီးသား ဗားရှင်းသစ်</p>
             </div>
         </div>
         <div class="flex items-center space-x-4">
             <div class="flex items-center space-x-2 bg-gray-800 px-3 py-1.5 rounded-lg border border-gray-700 text-xs">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="text-gray-300">Web AI Engine Active</span>
+                <span class="text-gray-300">Seamless Playback Engine Active</span>
             </div>
         </div>
     </header>
@@ -60,22 +60,6 @@
         
         <div class="lg:col-span-7 flex flex-col space-y-6">
             
-            <div class="bg-gray-900 border border-red-500/30 rounded-2xl p-4 shadow-xl space-y-3">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-red-400 flex items-center gap-2">
-                    <i class="fa-solid fa-key"></i> AI Service API Credentials (ထည့်သွင်းရန်လိုအပ်သည်)
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div>
-                        <label class="text-[10px] text-gray-400 block mb-1">Gemini API Key (ဇာတ်ညွှန်းထုတ်ရန်)</label>
-                        <input type="password" id="api-gemini" value="AIzaSyABLZBaRbB6WY7XWvHLDfscAc1hegQJmnY" class="w-full bg-gray-950 border border-gray-800 p-2 rounded-lg text-xs text-white outline-none focus:border-amber-500">
-                    </div>
-                    <div>
-                        <label class="text-[10px] text-gray-400 block mb-1">Groq API Key (Audio Whisper သုံးရန်)</label>
-                        <input type="password" id="api-groq" value="Gsk_6OgZ09bVkzNj8rxCM04mWGdyb3FYnJQX6RLUg55Rdc2vlnde7nk1" class="w-full bg-gray-950 border border-gray-800 p-2 rounded-lg text-xs text-white outline-none focus:border-amber-500">
-                    </div>
-                </div>
-            </div>
-
             <div class="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col">
                 <div class="bg-gray-950/80 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
                     <span class="text-xs font-semibold uppercase tracking-wider text-gray-400 flex items-center gap-2">
@@ -84,23 +68,22 @@
                     <span id="video-timer" class="text-xs font-mono text-amber-400">00:00.0 / 00:00.0</span>
                 </div>
                 
-                <div class="relative bg-black flex flex-col items-center justify-center p-4 min-h-[350px]">
+                <div class="relative bg-black flex items-center justify-center p-4 min-h-[350px]">
                     <div id="canvas-wrapper" class="canvas-container relative max-w-full max-h-[500px] flex items-center justify-center">
                         <canvas id="editor-canvas" class="rounded-lg shadow-2xl bg-gray-950 object-contain"></canvas>
                     </div>
                     
                     <video id="core-video" class="hidden" crossorigin="anonymous"></video>
                     
-                    <div id="upload-placeholder" class="absolute inset-0 flex flex-col items-center justify-center bg-gray-950/90 border-2 border-dashed border-gray-700 m-4 rounded-xl p-6 transition-all duration-300 z-10">
-                        <div class="bg-gray-900 p-4 rounded-full mb-2 text-gray-400">
-                            <i class="fa-solid fa-video-camera text-3xl"></i>
+                    <div id="upload-placeholder" class="absolute inset-0 flex flex-col items-center justify-center bg-gray-950/90 border-2 border-dashed border-gray-700 m-4 rounded-xl cursor-pointer hover:border-amber-500 transition-all duration-300 z-10">
+                        <div class="bg-gray-900 p-5 rounded-full mb-3 text-gray-400 group-hover:text-amber-500 transition-colors">
+                            <i class="fa-solid fa-video-camera text-4xl"></i>
                         </div>
-                        <p class="font-medium text-xs text-gray-200 text-center">ဤနေရာတွင် သင်၏ Movie Recap ဗီဒီယိုကို ထည့်ပါ</p>
-                        
-                        <label class="mt-4 px-5 py-2.5 bg-amber-500 text-black text-xs font-bold rounded-xl cursor-pointer shadow-lg hover:bg-amber-600 active:scale-95 transition-all text-center">
-                            <i class="fa-solid fa-file-video mr-1"></i> ဗီဒီယိုဖိုင် ရွေးချယ်မည်
-                            <input type="file" id="video-uploader" accept="video/*" class="hidden">
-                        </label>
+                        <p class="font-medium text-sm text-gray-200">ဤနေရာကို နှိပ်၍ ဗီဒီယိုဖိုင် ရွေးချယ်ပါ</p>
+                        <button type="button" class="mt-3 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-black text-xs font-bold rounded-lg shadow-lg flex items-center gap-1.5 transition-colors">
+                            <i class="fa-solid fa-folder-open"></i> ဗီဒီယိုဖိုင် ရွေးချယ်မည်
+                        </button>
+                        <input type="file" id="video-uploader" accept="video/*" class="hidden">
                     </div>
                 </div>
 
@@ -131,7 +114,7 @@
 
             <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 shadow-xl space-y-6">
                 <h3 class="text-sm font-semibold text-white border-b border-gray-800 pb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-palette text-amber-500"></i> Subtitle, Masking & Logo Setup
+                    <i class="fa-solid fa-sliders text-amber-500"></i> Subtitle, Masking & Logo Setup
                 </h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -151,8 +134,10 @@
                                 <label class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Blur Bar Background Color (ဖုံးကွယ်မည့်အရောင်)</label>
                                 <select id="mask-color" class="w-full bg-gray-900 border border-gray-800 p-2 rounded-lg text-xs text-white outline-none focus:border-amber-500">
                                     <option value="#000000" selected>Black (အနက်ရောင်)</option>
-                                    <option value="#1e293b">Dark Slate Gray (မီးخိုးရင့်ရောင်)</option>
+                                    <option value="#1e293b">Dark Slate Gray (မီးခိုးရင့်ရောင်)</option>
                                     <option value="#0f172a">Midnight Deep Blue (နက်ပြာရောင်)</option>
+                                    <option value="#450a0a">Dark Wine Red (ဝိုင်နီရင့်ရောင်)</option>
+                                    <option value="#064e3b">Deep Forest Green (တောအုပ်စိမ်းရောင်)</option>
                                 </select>
                             </div>
                             <div class="grid grid-cols-2 gap-2">
@@ -198,7 +183,7 @@
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
                             <label class="text-xs font-semibold text-gray-300 flex items-center gap-1.5">
-                                <i class="fa-solid fa-circle-check text-blue-400"></i> Subtitle Color & Logo Settings
+                                <i class="fa-solid fa-palette text-blue-400"></i> Subtitle Color & Logo Settings
                             </label>
                             <div class="relative inline-flex items-center cursor-pointer">
                                 <input type="checkbox" id="logo-enable" class="sr-only peer">
@@ -209,16 +194,18 @@
                         <div class="space-y-3 bg-gray-950 p-3.5 rounded-xl border border-gray-850">
                             <div>
                                 <label class="text-[10px] text-amber-400 uppercase tracking-wider block mb-1 font-bold">Myanmar Subtitle Color (မြန်မာစာတန်းထိုးအရောင်)</label>
-                                <select id="sub-color" class="w-full bg-gray-900 border border-gray-800 p-2 rounded-lg text-xs text-amber-400 font-bold outline-none">
+                                <select id="sub-color" class="w-full bg-gray-900 border border-gray-800 p-2 rounded-lg text-xs text-amber-400 font-bold outline-none focus:border-amber-500">
                                     <option value="#ffffff" selected>White (အဖြူစစ်စစ်)</option>
                                     <option value="#f59e0b">Amber Gold (ရွှေဝါရောင်)</option>
                                     <option value="#10b981">Emerald Green (ကျောက်စိမ်းရောင်)</option>
                                     <option value="#06b6d4">Cyan Sparkle (မိုးပြာရောင်)</option>
+                                    <option value="#ec4899">Sweet Rose Pink (ပန်းရောင်စိုစို)</option>
                                 </select>
                             </div>
+                            
                             <div>
                                 <label class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Logo Text (စာသား)</label>
-                                <input type="text" id="logo-text" value="MYANMAR RECAP" class="w-full bg-gray-900 border border-gray-800 p-2 rounded-lg text-xs text-white outline-none">
+                                <input type="text" id="logo-text" value="MYANMAR RECAP" class="w-full bg-gray-900 border border-gray-800 p-2 rounded-lg text-xs text-white outline-none focus:border-amber-500">
                             </div>
                             <div class="grid grid-cols-2 gap-2">
                                 <div>
@@ -226,6 +213,8 @@
                                     <select id="logo-position" class="w-full bg-gray-900 border border-gray-800 p-2 rounded-lg text-xs text-white outline-none">
                                         <option value="top-right">Top Right</option>
                                         <option value="top-left">Top Left</option>
+                                        <option value="bottom-left">Bottom Left</option>
+                                        <option value="bottom-right">Bottom Right</option>
                                     </select>
                                 </div>
                                 <div>
@@ -240,7 +229,6 @@
         </div>
 
         <div class="lg:col-span-5 flex flex-col space-y-6 overflow-hidden">
-            
             <div class="bg-gray-900 border border-gray-800 rounded-2xl p-4 shadow-xl space-y-4">
                 <h3 class="text-xs font-bold uppercase tracking-wider text-amber-500 flex items-center gap-2">
                     <i class="fa-solid fa-crop-simple"></i> Video Canvas Resolution & Presets
@@ -248,7 +236,7 @@
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Platform Size (ဆိုဒ်အချိုးအစား)</label>
-                        <select id="preset-size" class="w-full bg-gray-950 border border-gray-850 p-2 rounded-lg text-xs text-white font-medium outline-none">
+                        <select id="preset-size" class="w-full bg-gray-950 border border-gray-850 p-2 rounded-lg text-xs text-white font-medium outline-none focus:border-amber-500">
                             <option value="youtube">YouTube (16:9 Widescreen)</option>
                             <option value="tiktok">TikTok / Reels (9:16 Vertical)</option>
                             <option value="facebook">Facebook / Post (1:1 Square)</option>
@@ -256,10 +244,10 @@
                     </div>
                     <div>
                         <label class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Quality Resolution (အရည်အသွေး)</label>
-                        <select id="preset-resolution" class="w-full bg-gray-950 border border-gray-850 p-2 rounded-lg text-xs text-white font-medium outline-none">
-                            <option value="480">480p (SD)</option>
-                            <option value="720" selected>720p (HD)</option>
-                            <option value="1080">1080p (FHD)</option>
+                        <select id="preset-resolution" class="w-full bg-gray-950 border border-gray-850 p-2 rounded-lg text-xs text-white font-medium outline-none focus:border-amber-500">
+                            <option value="480">480p (Standard Definition)</option>
+                            <option value="720" selected>720p (High Definition)</option>
+                            <option value="1080">1080p (Full High Definition)</option>
                         </select>
                     </div>
                 </div>
@@ -271,25 +259,24 @@
                         <i class="fa-solid fa-bolt text-lg"></i>
                     </span>
                     <div>
-                        <h4 class="text-sm font-bold text-white">One-Click AI Audio & Script Sync</h4>
-                        <p class="text-[11px] text-gray-400">ဗီဒီယိုကို ဖတ်ပြီး AI စနစ်ဖြင့် မြန်မာလို ဇာတ်ကြောင်းပြောနှင့် စာတန်းထိုးများကို အော်တို ထုတ်ပေးပါမည်။</p>
+                        <h4 class="text-sm font-bold text-white">One-Click AI Audio Transcribe</h4>
+                        <p class="text-[11px] text-gray-400">ဗီဒီယိုအသံကို တိုက်ရိုက်ဖတ်ပြီး စာတန်းထိုးများကို 1.2x ဖြင့် ညှိပေးပါမည်။</p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-3 bg-gray-950/80 p-3.5 rounded-xl border border-gray-800">
                     <div>
-                        <label class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">AI Story Style</label>
-                        <select id="story-style" class="w-full bg-gray-900 border border-gray-800 p-2 rounded-lg text-xs text-amber-400 font-semibold outline-none">
-                            <option value="standard" selected>Standard (ရိုးရိုး)</option>
-                            <option value="action">Action (စိတ်လှုပ်ရှားဖွယ်)</option>
-                            <option value="drama">Drama (ခံစားချက်အပြည့်)</option>
+                        <label class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">AI Voice အသံရွေးရန်</label>
+                        <select id="voice-selector" class="w-full bg-gray-900 border border-gray-800 p-2 rounded-lg text-xs text-amber-400 font-semibold outline-none">
+                            <option value="Kore">Kore (Recommended)</option>
+                            <option value="Zephyr">Zephyr (သွက်သွက်)</option>
+                            <option value="Puck">Puck (ရုပ်ရှင်သုံး)</option>
                         </select>
                     </div>
                     <div>
-                        <label class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">AI Voice (မြန်မာအသံ)</label>
-                        <select id="voice-selector" class="w-full bg-gray-900 border border-gray-800 p-2 rounded-lg text-xs text-amber-400 font-semibold outline-none">
-                            <option value="my-MM-NilarNeural" selected>Nilar (အမျိုးသမီး)</option>
-                            <option value="my-MM-ThihaNeural">Thiha (အမျိုးသား)</option>
+                        <label class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">AI Sync Speed</label>
+                        <select id="narration-speed" class="w-full bg-gray-900 border border-gray-800 p-2 rounded-lg text-xs text-amber-400 font-semibold outline-none" disabled>
+                            <option value="1.2" selected>1.2x (သွက်သွက်)</option>
                         </select>
                     </div>
                 </div>
@@ -299,7 +286,7 @@
                         <input id="mute-original-audio-toggle" type="checkbox" class="w-4 h-4 text-amber-500 bg-gray-900 border-gray-800 rounded focus:ring-amber-500 accent-amber-500" checked>
                     </div>
                     <div class="ml-2 text-xs">
-                        <label for="mute-original-audio-toggle" class="font-medium text-gray-200">မူရင်းဗီဒီယိုအသံကို ပိတ်မည် (Mute Original Audio)</label>
+                        <label for="mute-original-audio-toggle" class="font-medium text-gray-200">မူရင်းဗီဒီယိုအသံကို လုံးဝပိတ်ပစ်မည် (Mute Original Audio)</label>
                     </div>
                 </div>
 
@@ -310,7 +297,7 @@
 
             <div class="bg-gray-900 border border-gray-800 rounded-2xl flex flex-col flex-grow min-h-[200px] overflow-hidden shadow-xl">
                 <div class="bg-gray-950/80 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
-                    <span class="text-xs font-semibold uppercase tracking-wider text-gray-400 flex items-center gap-2">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">
                         <i class="fa-solid fa-list-check text-amber-500"></i> Narrative Timeline Editor
                     </span>
                     <button id="btn-add-segment" class="text-xs font-semibold text-amber-400 hover:text-amber-300 flex items-center gap-1">
@@ -320,7 +307,10 @@
 
                 <div id="segment-container" class="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar bg-gray-950/40">
                     <div id="empty-state-notice" class="flex flex-col items-center justify-center h-full text-center py-10">
-                        <p class="text-xs text-gray-400 font-medium">ဗီဒီယိုဖိုင် မရှိသေးပါ သို့မဟုတ် AI မခေါ်ရသေးပါ</p>
+                        <div class="text-gray-600 mb-3">
+                            <i class="fa-regular fa-folder-open text-4xl"></i>
+                        </div>
+                        <p class="text-xs text-gray-400 font-medium">ဗီဒီယိုဖိုင် မရှိသေးပါ</p>
                     </div>
                 </div>
 
@@ -334,7 +324,7 @@
                     </div>
                     <div>
                         <div class="flex justify-between text-[10px] text-gray-400 mb-1">
-                            <span>မူရင်းဗီဒီယိုအသံကျအား (Original Volume)</span>
+                            <span>မူရင်းဗီဒီယိုအသံကျအား (Original Audio Volume)</span>
                             <span id="duck-vol-val">0%</span>
                         </div>
                         <input type="range" id="duck-volume" min="0" max="50" value="0" class="w-full h-1 bg-gray-800 rounded-lg accent-amber-500">
@@ -351,7 +341,7 @@
     </main>
 
     <div id="notification-toast" class="fixed bottom-6 right-6 z-[100] transform translate-y-20 opacity-0 transition-all duration-300 bg-gray-900 border border-gray-800 text-gray-100 px-5 py-4 rounded-xl shadow-2xl max-w-sm flex items-start space-x-3">
-        <div id="toast-icon" class="text-amber-500 mt-0.5"></div>
+        <div id="toast-icon" class="text-amber-500 mt-0.5"><i class="fa-solid fa-circle-info text-lg"></i></div>
         <div class="flex-1">
             <h5 id="toast-title" class="text-xs font-bold text-white">Notification</h5>
             <p id="toast-body" class="text-[11px] text-gray-400 mt-0.5"></p>
@@ -363,36 +353,25 @@
             <div class="relative w-24 h-24 mx-auto flex items-center justify-center">
                 <div class="absolute inset-0 rounded-full border-4 border-gray-800"></div>
                 <div class="absolute inset-0 rounded-full border-4 border-t-amber-500 animate-spin"></div>
-                <i class="fa-solid fa-bolt text-2xl text-amber-500"></i>
             </div>
             <div>
-                <h3 id="progress-title" class="text-sm font-bold text-white">AI Studio Active</h3>
-                <p id="progress-desc" class="text-xs text-gray-400 mt-1">အဆင့်ဆင့် လုပ်ဆောင်နေပါသည်...</p>
+                <h3 id="progress-title" class="text-sm font-bold text-white">Processing...</h3>
+                <p id="progress-desc" class="text-xs text-gray-400 mt-1">ခေတ္တစောင့်ဆိုင်းပေးပါ...</p>
             </div>
-        </div>
-    </div>
-
-    <div id="preview-modal" class="fixed inset-0 bg-black/95 backdrop-blur z-[100] hidden flex items-center justify-center">
-        <div class="bg-gray-900 border border-gray-800 rounded-3xl p-6 max-w-4xl w-full mx-4 shadow-2xl space-y-5 flex flex-col max-h-[90vh]">
-            <div class="flex items-center justify-between border-b border-gray-850 pb-3">
-                <h3 class="text-sm font-bold text-white">Recap Video Ready</h3>
-                <button id="btn-close-preview" class="w-8 h-8 rounded-full bg-gray-850 text-gray-400 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+            <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                <div id="progress-bar-fill" class="bg-gradient-to-r from-amber-500 to-emerald-500 h-full w-[0%]"></div>
             </div>
-            <div class="flex-1 bg-black rounded-2xl overflow-hidden relative flex items-center justify-center">
-                <video id="rendered-preview-video" controls class="max-w-full max-h-[60vh] object-contain"></video>
-            </div>
-            <div class="flex items-center justify-end">
-                <button id="btn-final-download" class="px-8 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold rounded-xl shadow-lg">
-                    <i class="fa-solid fa-cloud-arrow-down mr-1"></i> Save Video to Device
-                </button>
-            </div>
+            <div id="progress-percent" class="text-xs font-mono text-amber-400 font-bold">0%</div>
         </div>
     </div>
 
     <script>
+        // Core Application State
         let videoFile = null;
+        let videoArrayBuffer = null;
         let timelineSegments = [];
 
+        // DOM elements
         const coreVideo = document.getElementById('core-video');
         const editorCanvas = document.getElementById('editor-canvas');
         const ctx = editorCanvas.getContext('2d');
@@ -410,7 +389,7 @@
         
         const subSize = document.getElementById('sub-size');
         const subColor = document.getElementById('sub-color');
-        const muteOriginalAudioToggle = document.getElementById('mute-original-audio-toggle');
+        const duckVolume = document.getElementById('duck-volume');
 
         const presetSize = document.getElementById('preset-size');
         const presetResolution = document.getElementById('preset-resolution');
@@ -434,179 +413,161 @@
         const btnStop = document.getElementById('btn-stop');
         const timelineSlider = document.getElementById('timeline-slider');
         const volumeSlider = document.getElementById('volume-slider');
+        const btnMute = document.getElementById('btn-mute');
 
-        const segmentContainer = document.getElementById('segment-container');
-        const btnAddSegment = document.getElementById('btn-add-segment');
-        const btnOneClickMagic = document.getElementById('btn-one-click-magic');
-        const btnExport = document.getElementById('btn-export');
+        const toast = document.getElementById('notification-toast');
+        const toastTitle = document.getElementById('toast-title');
+        const toastBody = document.getElementById('toast-body');
 
-        const previewModal = document.getElementById('preview-modal');
-        const renderedPreviewVideo = document.getElementById('rendered-preview-video');
-        const btnClosePreview = document.getElementById('btn-close-preview');
-        const btnFinalDownload = document.getElementById('btn-final-download');
-
-        const progressModal = document.getElementById('progress-modal');
-        const progressTitle = document.getElementById('progress-title');
-        const progressDesc = document.getElementById('progress-desc');
-
+        // Notification System
         function showToast(title, msg, type = 'info') {
-            document.getElementById('toast-title').innerText = title;
-            document.getElementById('toast-body').innerText = msg;
-            const toast = document.getElementById('notification-toast');
+            toastTitle.innerText = title;
+            toastBody.innerText = msg;
             toast.classList.remove('translate-y-20', 'opacity-0');
             setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 4000);
         }
 
-        function showProgress(title, desc) {
-            progressModal.classList.remove('hidden');
-            progressTitle.innerText = title;
-            progressDesc.innerText = desc;
-        }
-
-        function hideProgress() {
-            progressModal.classList.add('hidden');
-        }
-
+        // Setup Resolutions & Aspect Ratios
         function updateCanvasDimensions() {
             const aspect = presetSize.value;
             const res = parseInt(presetResolution.value);
             let width, height;
 
-            if (aspect === 'youtube') {
-                height = res; width = Math.round(res * (16 / 9));
-                canvasWrapper.style.aspectRatio = "16/9"; canvasWrapper.style.width = "100%";
-            } else if (aspect === 'tiktok') {
-                height = Math.round(res * (16 / 9)); width = res;
-                canvasWrapper.style.aspectRatio = "9/16"; canvasWrapper.style.height = "400px";
-            } else {
-                height = res; width = res;
-                canvasWrapper.style.aspectRatio = "1/1"; canvasWrapper.style.height = "350px";
-            }
-            editorCanvas.width = width; editorCanvas.height = height;
-            drawCanvasFrame();
+            if (aspect === 'youtube') { height = res; width = Math.round(res * (16 / 9)); canvasWrapper.style.aspectRatio = "16/9"; }
+            else if (aspect === 'tiktok') { height = Math.round(res * (16 / 9)); width = res; canvasWrapper.style.aspectRatio = "9/16"; }
+            else if (aspect === 'facebook') { height = res; width = res; canvasWrapper.style.aspectRatio = "1/1"; }
+
+            editorCanvas.width = width;
+            editorCanvas.height = height;
+            triggerCanvasDraw();
         }
 
-        function initEvents() {
-            videoUploader.addEventListener('change', (e) => { if(e.target.files.length) processVideoFile(e.target.files[0]); });
-            
-            btnPlayPause.addEventListener('click', () => { if(coreVideo.paused) coreVideo.play(); else coreVideo.pause(); });
-            btnStop.addEventListener('click', () => { coreVideo.pause(); coreVideo.currentTime = 0; });
-            
-            coreVideo.addEventListener('timeupdate', updateTimeline);
-            coreVideo.addEventListener('loadedmetadata', () => {
-                btnPlayPause.disabled = false; btnStop.disabled = false; timelineSlider.disabled = false;
-                totalDurationLbl.innerText = formatTime(coreVideo.duration);
-                timelineSlider.max = Math.floor(coreVideo.duration);
-                updateCanvasDimensions();
-            });
-
-            coreVideo.addEventListener('play', () => { btnPlayPause.innerHTML = `<i class="fa-solid fa-pause"></i>`; renderLoop(); });
-            coreVideo.addEventListener('pause', () => btnPlayPause.innerHTML = `<i class="fa-solid fa-play"></i>`);
-            
-            timelineSlider.addEventListener('input', (e) => { coreVideo.currentTime = e.target.value; });
-            volumeSlider.addEventListener('input', (e) => { coreVideo.volume = e.target.value; });
-
-            presetSize.addEventListener('change', updateCanvasDimensions);
-            presetResolution.addEventListener('change', updateCanvasDimensions);
-            
-            maskY.addEventListener('input', (e) => { maskYVal.innerText = e.target.value + '%'; drawCanvasFrame(); });
-            maskHeight.addEventListener('input', (e) => { maskHVal.innerText = e.target.value + '%'; drawCanvasFrame(); });
-            maskOpacity.addEventListener('input', (e) => { maskOpacityVal.innerText = e.target.value + '%'; drawCanvasFrame(); });
-            maskXPos.addEventListener('input', (e) => { maskXVal.innerText = e.target.value + '%'; drawCanvasFrame(); });
-            maskWidth.addEventListener('input', (e) => { maskWVal.innerText = e.target.value + '%'; drawCanvasFrame(); });
-            subSize.addEventListener('input', (e) => { subSizeVal.innerText = e.target.value + 'px'; drawCanvasFrame(); });
-
-            btnAddSegment.addEventListener('click', addCustomSegmentData);
-            btnOneClickMagic.addEventListener('click', runOneClickAIWorkflow);
-            btnExport.addEventListener('click', exportFinalRecapVideo);
-            btnClosePreview.addEventListener('click', () => previewModal.classList.add('hidden'));
+        // --- ပြင်ဆင်လိုက်သည့် အဓိက ဗီဒီယိုဖိုင်ဖတ်သည့်စနစ် (FIXED) ---
+        function handleFileSelected(e) {
+            const file = e.target.files[0];
+            if (file) { processVideoFile(file); }
         }
 
         function processVideoFile(file) {
             videoFile = file;
-            uploadPlaceholder.classList.add('hidden');
-            coreVideo.src = URL.createObjectURL(file);
+            showToast("ဖိုင်ရယူနေပါသည်", "ဗီဒီယိုဖိုင်ကို စနစ်ထဲသို့ ထည့်သွင်းနေပါသည်...", "info");
+            
+            const fileUrl = URL.createObjectURL(file);
+            coreVideo.src = fileUrl;
             coreVideo.load();
-            showToast("ဗီဒီယို အောင်မြင်သည်", "ဗီဒီယိုဖိုင်ကို Canvas ထဲသို့ ထည့်သွင်းပြီးပါပြီ။", "success");
+
+            // UI ပြောင်းလဲရန်
+            uploadPlaceholder.classList.add('hidden');
+            btnPlayPause.disabled = false;
+            btnStop.disabled = false;
+            timelineSlider.disabled = false;
+        }
+
+        function handleVideoLoaded() {
+            updateCanvasDimensions();
+            const duration = coreVideo.duration;
+            totalDurationLbl.innerText = formatTime(duration);
+            timelineSlider.max = Math.floor(duration);
+            document.getElementById('empty-state-notice')?.classList.add('hidden');
+            showToast("အောင်မြင်ပါသည်", "ဗီဒီယို တင်သွင်းမှု ပြီးမြောက်ပါပြီ။", "success");
         }
 
         function formatTime(secs) {
-            let m = Math.floor(secs / 60).toString().padStart(2, '0');
-            let s = Math.floor(secs % 60).toString().padStart(2, '0');
+            const m = Math.floor(secs / 60).toString().padStart(2, '0');
+            const s = Math.floor(secs % 60).toString().padStart(2, '0');
             return `${m}:${s}`;
         }
 
-        function updateTimeline() {
-            timelineSlider.value = Math.floor(coreVideo.currentTime);
-            currentTimeLbl.innerText = formatTime(coreVideo.currentTime);
-            videoTimer.innerText = `${formatTime(coreVideo.currentTime)} / ${formatTime(coreVideo.duration)}`;
-            drawCanvasFrame();
+        function togglePlayback() {
+            if (coreVideo.paused) { coreVideo.play(); } 
+            else { coreVideo.pause(); }
         }
 
-        function renderLoop() {
-            if (!coreVideo.paused && !coreVideo.ended) {
-                drawCanvasFrame();
-                requestAnimationFrame(renderLoop);
-            }
+        function stopPlayback() {
+            coreVideo.pause();
+            coreVideo.currentTime = 0;
+            triggerCanvasDraw();
         }
 
-        function drawCanvasFrame() {
-            if (!coreVideo.readyState) return;
-            const w = editorCanvas.width;
-            const h = editorCanvas.height;
+        function updatePlaybackTimeline() {
+            const curr = coreVideo.currentTime;
+            const dur = coreVideo.duration || 0;
+            currentTimeLbl.innerText = formatTime(curr);
+            videoTimer.innerText = `${formatTime(curr)} / ${formatTime(dur)}`;
+            timelineSlider.value = Math.floor(curr);
+            triggerCanvasDraw();
+        }
+
+        function triggerCanvasDraw() {
+            if (!coreVideo.src) return;
+            ctx.clearRect(0, 0, editorCanvas.width, editorCanvas.height);
             
-            ctx.clearRect(0, 0, w, h);
-            ctx.drawImage(coreVideo, 0, 0, w, h);
-
-            // Subtitle Mask Blur Overlay Bar
+            // Draw Video Frame
+            ctx.drawImage(coreVideo, 0, 0, editorCanvas.width, editorCanvas.height);
+            
+            // Draw Mask Overlay
             if (maskEnable.checked) {
+                const maskYPosPct = parseInt(maskY.value) / 100;
+                const maskHeightPct = parseInt(maskHeight.value) / 100;
+                const maskXPct = parseInt(maskXPos.value) / 100;
+                const maskWidthPct = parseInt(maskWidth.value) / 100;
+
                 ctx.save();
                 ctx.globalAlpha = parseInt(maskOpacity.value) / 100;
                 ctx.fillStyle = maskColor.value;
-                const mX = (parseInt(maskXPos.value) / 100) * w;
-                const mY = (parseInt(maskY.value) / 100) * h;
-                const mW = (parseInt(maskWidth.value) / 100) * w;
-                const mH = (parseInt(maskHeight.value) / 100) * h;
-                ctx.fillRect(mX, mY, mW, mH);
+                ctx.fillRect(
+                    editorCanvas.width * maskXPct, 
+                    editorCanvas.height * maskYPosPct, 
+                    editorCanvas.width * maskWidthPct, 
+                    editorCanvas.height * maskHeightPct
+                );
                 ctx.restore();
             }
 
-            // Watermark Logo
-            if (logoEnable.checked && logoText.value.trim() !== "") {
+            // Draw Logo Watermark
+            if (logoEnable.checked) {
                 ctx.save();
                 ctx.globalAlpha = parseInt(logoOpacity.value) / 100;
-                ctx.font = "bold 14px Arial";
                 ctx.fillStyle = "#ffffff";
-                if (logoPosition.value === "top-right") {
-                    ctx.fillText(logoText.value, w - ctx.measureText(logoText.value).width - 20, 30);
-                } else {
-                    ctx.fillText(logoText.value, 20, 30);
-                }
-                ctx.restore();
-            }
-
-            // Render Dynamic Subtitles based on Timeline
-            const curTime = coreVideo.currentTime;
-            const currentActiveSegment = timelineSegments.find(s => curTime >= s.start && curTime <= s.end);
-            if (currentActiveSegment && currentActiveSegment.text.trim() !== "") {
-                ctx.save();
-                ctx.font = `bold ${subSize.value}px Padauk, Arial`;
-                ctx.fillStyle = subColor.value;
-                ctx.textAlign = "center";
-                ctx.shadowColor = "black";
-                ctx.shadowBlur = 6;
+                ctx.font = "bold 16px sans-serif";
                 
-                const lines = currentActiveSegment.text.split("\n");
-                let subY = (parseInt(maskY.value) / 100) * h + ((parseInt(maskHeight.value) / 100) * h / 2) + 6;
-                lines.forEach((line, i) => {
-                    ctx.fillText(line, w / 2, subY + (i * (parseInt(subSize.value) + 5)));
-                });
+                let lx = 20, ly = 40;
+                if (logoPosition.value === 'top-right') { lx = editorCanvas.width - ctx.measureText(logoText.value).width - 20; }
+                else if (logoPosition.value === 'bottom-left') { ly = editorCanvas.height - 30; }
+                else if (logoPosition.value === 'bottom-right') { lx = editorCanvas.width - ctx.measureText(logoText.value).width - 20; ly = editorCanvas.height - 30; }
+                
+                ctx.fillText(logoText.value, lx, ly);
                 ctx.restore();
             }
         }
 
-        function addCustomSegmentData() {
-            const start = timelineSegments.length * 5;
-            const end = start + 5;
-            const seg = { id: Date.now(), start: start, end: end, text: "မြန်မာစာတန်းထိုး ထည့်ရန်" };
-            timelineSegments.push
+        function initEvents() {
+            uploadPlaceholder.addEventListener('click', () => videoUploader.click());
+            videoUploader.addEventListener('change', handleFileSelected);
+            
+            btnPlayPause.addEventListener('click', togglePlayback);
+            btnStop.addEventListener('click', stopPlayback);
+            coreVideo.addEventListener('timeupdate', updatePlaybackTimeline);
+            coreVideo.addEventListener('loadedmetadata', handleVideoLoaded);
+            coreVideo.addEventListener('seeked', triggerCanvasDraw);
+            
+            timelineSlider.addEventListener('input', (e) => {
+                coreVideo.currentTime = e.target.value;
+            });
+
+            maskY.addEventListener('input', (e) => { maskYVal.innerText = `${e.target.value}%`; triggerCanvasDraw(); });
+            maskHeight.addEventListener('input', (e) => { maskHVal.innerText = `${e.target.value}%`; triggerCanvasDraw(); });
+            maskOpacity.addEventListener('input', (e) => { maskOpacityVal.innerText = `${e.target.value}%`; triggerCanvasDraw(); });
+            maskXPos.addEventListener('input', (e) => { maskXVal.innerText = `${e.target.value}%`; triggerCanvasDraw(); });
+            maskWidth.addEventListener('input', (e) => { maskWVal.innerText = `${e.target.value}%`; triggerCanvasDraw(); });
+            presetSize.addEventListener('change', updateCanvasDimensions);
+            presetResolution.addEventListener('change', updateCanvasDimensions);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initEvents();
+            updateCanvasDimensions();
+        });
+    </script>
+</body>
+</html>
