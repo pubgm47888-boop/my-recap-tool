@@ -45,7 +45,7 @@
                 <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
                     AI Movie Recap <span class="bg-amber-500/10 text-amber-400 text-xs px-2 py-0.5 rounded border border-amber-500/20 font-medium">One-Click Auto Pro v8.2</span>
                 </h1>
-                <p class="text-xs text-gray-400">စာတန်းထိုး တစ်ကြောင်းချင်းစနစ်၊ အရောင်ရွေးချယ်မှုများနှင့် ဗီဒီယိုတင်စနစ် အမှားပြင်ဆင်ပြီးသား ဗားရှင်းသစ်</p>
+                <p class="text-xs text-gray-400">ပြင်ပ API Input Panel ပါဝင်သော ဗားရှင်းသစ်</p>
             </div>
         </div>
         <div class="flex items-center space-x-4">
@@ -55,6 +55,21 @@
             </div>
         </div>
     </header>
+
+    <section class="m-6 mb-0 p-4 bg-gray-900/60 border border-gray-800 rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+            <label class="text-xs font-bold text-amber-400 block mb-1.5 uppercase tracking-wider">
+                <i class="fa-solid fa-key mr-1"></i> Groq API Key (Transcription တာဝန်ယူရန်)
+            </label>
+            <input type="password" id="input-groq-key" placeholder="gsk_..." class="w-full bg-gray-950 border border-gray-800 p-2.5 rounded-xl text-xs text-white outline-none focus:border-amber-500 font-mono">
+        </div>
+        <div>
+            <label class="text-xs font-bold text-amber-400 block mb-1.5 uppercase tracking-wider">
+                <i class="fa-solid fa-key mr-1"></i> Gemini API Key (မြန်မာဘာသာပြန် တာဝန်ယူရန်)
+            </label>
+            <input type="password" id="input-gemini-key" placeholder="AIzaSy..." class="w-full bg-gray-950 border border-gray-800 p-2.5 rounded-xl text-xs text-white outline-none focus:border-amber-500 font-mono">
+        </div>
+    </section>
 
     <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 overflow-hidden">
         
@@ -79,10 +94,8 @@
                         <div class="bg-gray-900 p-5 rounded-full mb-3 text-gray-400 group-hover:text-amber-500 transition-colors">
                             <i class="fa-solid fa-video-camera text-4xl"></i>
                         </div>
-                        <p class="font-medium text-sm text-gray-200">ဤနေရာကို နှိပ်၍ ဗီဒီယိုဖိုင် ရွေးချယ်ပါ</p>
-                        <button type="button" class="mt-3 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-black text-xs font-bold rounded-lg shadow-lg flex items-center gap-1.5 transition-colors">
-                            <i class="fa-solid fa-folder-open"></i> ဗီဒီယိုဖိုင် ရွေးချယ်မည်
-                        </button>
+                        <p class="font-medium text-sm text-gray-200">ဤနေရာတွင် သင်၏ Movie Recap ဗီဒီယိုကို ထည့်ပါ</p>
+                        <p class="text-xs text-gray-500 mt-1">နှိပ်၍လည်း ဖိုင်ရွေးချယ်တင်သွင်းနိုင်ပါသည်။</p>
                         <input type="file" id="video-uploader" accept="video/*" class="hidden">
                     </div>
                 </div>
@@ -183,7 +196,7 @@
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
                             <label class="text-xs font-semibold text-gray-300 flex items-center gap-1.5">
-                                <i class="fa-solid fa-palette text-blue-400"></i> Subtitle Color & Logo Settings
+                                <i class="fa-solid fa-palette text-blue-400"></i> Subtitle Color (၅ မျိုး) & Logo Settings
                             </label>
                             <div class="relative inline-flex items-center cursor-pointer">
                                 <input type="checkbox" id="logo-enable" class="sr-only peer">
@@ -229,6 +242,7 @@
         </div>
 
         <div class="lg:col-span-5 flex flex-col space-y-6 overflow-hidden">
+            
             <div class="bg-gray-900 border border-gray-800 rounded-2xl p-4 shadow-xl space-y-4">
                 <h3 class="text-xs font-bold uppercase tracking-wider text-amber-500 flex items-center gap-2">
                     <i class="fa-solid fa-crop-simple"></i> Video Canvas Resolution & Presets
@@ -260,7 +274,7 @@
                     </span>
                     <div>
                         <h4 class="text-sm font-bold text-white">One-Click AI Audio Transcribe</h4>
-                        <p class="text-[11px] text-gray-400">ဗီဒီယိုအသံကို တိုက်ရိုက်ဖတ်ပြီး စာတန်းထိုးများကို 1.2x ဖြင့် ညှိပေးပါမည်။</p>
+                        <p class="text-[11px] text-gray-400">ဗီဒီယိုအသံကို တိုက်ရိုက်ဖတ်ပြီး တိုတိုရှင်းရှင်း တစ်ကြောင်းတည်းစာတန်းထိုးများကို 1.2x ဖြင့် ကွက်တိညှိပေးပါမည်။</p>
                     </div>
                 </div>
 
@@ -268,15 +282,12 @@
                     <div>
                         <label class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">AI Voice အသံရွေးရန်</label>
                         <select id="voice-selector" class="w-full bg-gray-900 border border-gray-800 p-2 rounded-lg text-xs text-amber-400 font-semibold outline-none">
-                            <option value="Kore">Kore (Recommended)</option>
-                            <option value="Zephyr">Zephyr (သွက်သွက်)</option>
-                            <option value="Puck">Puck (ရုပ်ရှင်သုံး)</option>
-                        </select>
+                            </select>
                     </div>
                     <div>
                         <label class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">AI Sync Speed</label>
                         <select id="narration-speed" class="w-full bg-gray-900 border border-gray-800 p-2 rounded-lg text-xs text-amber-400 font-semibold outline-none" disabled>
-                            <option value="1.2" selected>1.2x (သွက်သွက်)</option>
+                            <option value="1.15" selected>1.15x (Recap Speed)</option>
                         </select>
                     </div>
                 </div>
@@ -287,17 +298,18 @@
                     </div>
                     <div class="ml-2 text-xs">
                         <label for="mute-original-audio-toggle" class="font-medium text-gray-200">မူရင်းဗီဒီယိုအသံကို လုံးဝပိတ်ပစ်မည် (Mute Original Audio)</label>
+                        <p class="text-[10px] text-gray-500">ဗီဒီယိုအသံကို လုံးဝဖျောက်ပြီး AI မြန်မာအသံနောက်ခံ သက်သက်သာ ထုတ်ပါမည်။</p>
                     </div>
                 </div>
 
-                <button id="btn-one-click-magic" class="w-full py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black text-xs font-extrabold uppercase tracking-widest rounded-xl transition-all shadow-lg flex items-center justify-center gap-2">
+                <button id="btn-one-click-magic" class="w-full py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black text-xs font-extrabold uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2">
                     <i class="fa-solid fa-microphone-lines animate-pulse"></i> Start One-Click AI Audio Transcribe
                 </button>
             </div>
 
             <div class="bg-gray-900 border border-gray-800 rounded-2xl flex flex-col flex-grow min-h-[200px] overflow-hidden shadow-xl">
                 <div class="bg-gray-950/80 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
-                    <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-gray-400 flex items-center gap-2">
                         <i class="fa-solid fa-list-check text-amber-500"></i> Narrative Timeline Editor
                     </span>
                     <button id="btn-add-segment" class="text-xs font-semibold text-amber-400 hover:text-amber-300 flex items-center gap-1">
@@ -311,6 +323,7 @@
                             <i class="fa-regular fa-folder-open text-4xl"></i>
                         </div>
                         <p class="text-xs text-gray-400 font-medium">ဗီဒီယိုဖိုင် မရှိသေးပါ</p>
+                        <p class="text-[10px] text-gray-500 mt-1">အထက်ပါ One-Click ခလုတ်ကို နှိပ်လိုက်ပါက မူရင်းအသံကိုနားထောင်ပြီး မြန်မာစာတန်းများ ပေါ်လာမည်ဖြစ်သည်</p>
                     </div>
                 </div>
 
@@ -333,7 +346,10 @@
             </div>
 
             <div class="bg-gray-900 border border-gray-800 rounded-2xl p-4 shadow-xl space-y-2">
-                <button id="btn-export" class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-lg flex items-center justify-center gap-2">
+                <div id="chunk-info-badge" class="hidden text-[10px] bg-amber-500/10 text-amber-400 p-2.5 rounded-lg border border-amber-500/20 text-center font-medium">
+                    ⚠️ ဗီဒီယိုမှာ ၃ မိနစ်ထက်ကျော်သောကြောင့် စက်ပစ္စည်းမလေးစေရန် ၂ မိနစ်တစ်ဖြတ်စီ ခွဲခြား Render ပြုလုပ်ပြီး စုစည်းပေါင်းစပ်သွားမည်ဖြစ်ပါသည်။
+                </div>
+                <button id="btn-export" class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-emerald-500/10 flex items-center justify-center gap-2">
                     <i class="fa-solid fa-download"></i> Combine & Export Final Movie Recap Video
                 </button>
             </div>
@@ -346,6 +362,7 @@
             <h5 id="toast-title" class="text-xs font-bold text-white">Notification</h5>
             <p id="toast-body" class="text-[11px] text-gray-400 mt-0.5"></p>
         </div>
+        <button onclick="hideToast()" class="text-gray-500 hover:text-gray-400"><i class="fa-solid fa-times"></i></button>
     </div>
 
     <div id="progress-modal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-[99] hidden flex items-center justify-center">
@@ -353,23 +370,89 @@
             <div class="relative w-24 h-24 mx-auto flex items-center justify-center">
                 <div class="absolute inset-0 rounded-full border-4 border-gray-800"></div>
                 <div class="absolute inset-0 rounded-full border-4 border-t-amber-500 animate-spin"></div>
+                <i class="fa-solid fa-bolt text-2xl text-amber-500 animate-pulse"></i>
             </div>
             <div>
-                <h3 id="progress-title" class="text-sm font-bold text-white">Processing...</h3>
-                <p id="progress-desc" class="text-xs text-gray-400 mt-1">ခေတ္တစောင့်ဆိုင်းပေးပါ...</p>
+                <h3 id="progress-title" class="text-sm font-bold text-white">One-Click AI Studio Processing</h3>
+                <p id="progress-desc" class="text-xs text-gray-400 mt-1">ဗီဒီယို တစ်ခုလုံးကို AI ဖြင့် ကွက်တိ ပြင်ဆင်နေပါသည်...</p>
             </div>
             <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
-                <div id="progress-bar-fill" class="bg-gradient-to-r from-amber-500 to-emerald-500 h-full w-[0%]"></div>
+                <div id="progress-bar-fill" class="bg-gradient-to-r from-amber-500 to-emerald-500 h-full w-[0%] transition-all duration-300"></div>
             </div>
             <div id="progress-percent" class="text-xs font-mono text-amber-400 font-bold">0%</div>
         </div>
     </div>
 
+    <div id="preview-modal" class="fixed inset-0 bg-black/95 backdrop-blur z-[100] hidden flex items-center justify-center">
+        <div class="bg-gray-900 border border-gray-800 rounded-3xl p-6 max-w-4xl w-full mx-4 shadow-2xl space-y-5 flex flex-col max-h-[90vh]">
+            <div class="flex items-center justify-between border-b border-gray-850 pb-3">
+                <div class="flex items-center space-x-2">
+                    <span class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
+                        <i class="fa-solid fa-square-play text-xl"></i>
+                    </span>
+                    <div>
+                        <h3 class="text-sm font-bold text-white">Exported Recap Video Preview</h3>
+                        <p class="text-xs text-gray-400">မြန်မာအသံ၊ စာတန်းထိုးနှင့် Background Sound အားလုံး စုံလင်စွာပါဝင်သည်</p>
+                    </div>
+                </div>
+                <button id="btn-close-preview" class="w-8 h-8 rounded-full bg-gray-850 hover:bg-gray-800 text-gray-400 hover:text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <div class="flex-1 bg-black rounded-2xl overflow-hidden relative flex items-center justify-center border border-gray-800">
+                <video id="rendered-preview-video" controls class="max-w-full max-h-[60vh] object-contain"></video>
+            </div>
+            
+            <div class="flex items-center justify-between pt-3 border-t border-gray-850">
+                <span id="video-file-info-label" class="text-xs text-gray-500 font-mono">Format: WebM/VP8</span>
+                <div class="flex items-center space-x-3">
+                    <button id="btn-re-render" class="px-5 py-2.5 bg-gray-800 hover:bg-gray-750 border border-gray-700 text-xs font-semibold rounded-xl transition-all">
+                        <i class="fa-solid fa-rotate-right mr-1"></i> ပြန်လည်ပြင်ဆင်မည်
+                    </button>
+                    <button id="btn-final-download" class="px-8 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-700 text-white text-xs font-bold rounded-xl transition-all shadow-lg shadow-emerald-500/20">
+                        <i class="fa-solid fa-cloud-arrow-down mr-1"></i> Save to Computer / Device
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // --- 🔑 INTERFACE API KEY SYNCHRONIZER (အပြင်စာရိုက်ကွက်များနှင့် localStorage ချိတ်ဆက်မှု) ---
+        const inputGroqKey = document.getElementById('input-groq-key');
+        const inputGeminiKey = document.getElementById('input-gemini-key');
+
+        // Browser သိမ်းထားတဲ့ key တွေရှိရင် ပြန်ဆွဲတင်ပေးခြင်း
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('saved_groq_key')) {
+                inputGroqKey.value = localStorage.getItem('saved_groq_key');
+            }
+            if (localStorage.getItem('saved_gemini_key')) {
+                inputGeminiKey.value = localStorage.getItem('saved_gemini_key');
+            }
+        });
+
+        // Key ရိုက်ထည့်လိုက်တာနဲ့ အလိုအလျောက် မှတ်သားထားခြင်း
+        inputGroqKey.addEventListener('input', () => localStorage.setItem('saved_groq_key', inputGroqKey.value.trim()));
+        inputGeminiKey.addEventListener('input', () => localStorage.setItem('saved_gemini_key', inputGeminiKey.value.trim()));
+
+        function getGroqKey() { return inputGroqKey.value.trim(); }
+        function getGeminiKey() { return inputGeminiKey.value.trim(); }
+
         // Core Application State
         let videoFile = null;
-        let videoArrayBuffer = null;
+        let videoArrayBuffer = null; 
         let timelineSegments = [];
+        let ttsAudioCache = {}; 
+        let audioContext = null;
+        
+        let masterAudioBuffer = null; 
+        let masterAudioSource = null; 
+        let masterAudioStartTime = 0; 
+        let masterAudioStartOffset = 0; 
+        let isMasterPlaying = false; 
+        let finalRenderedBlobUrl = null;
 
         // DOM elements
         const coreVideo = document.getElementById('core-video');
@@ -384,12 +467,13 @@
         const maskHeight = document.getElementById('mask-height');
         const maskOpacity = document.getElementById('mask-opacity');
         const maskColor = document.getElementById('mask-color');
-        const maskXPos = document.getElementById('mask-x-pos');
-        const maskWidth = document.getElementById('mask-width');
+        const maskXPos = document.getElementById('mask-x-pos'); 
+        const maskWidth = document.getElementById('mask-width'); 
         
         const subSize = document.getElementById('sub-size');
         const subColor = document.getElementById('sub-color');
         const duckVolume = document.getElementById('duck-volume');
+        const muteOriginalAudioToggle = document.getElementById('mute-original-audio-toggle');
 
         const presetSize = document.getElementById('preset-size');
         const presetResolution = document.getElementById('preset-resolution');
@@ -402,12 +486,14 @@
         const maskYVal = document.getElementById('mask-y-val');
         const maskHVal = document.getElementById('mask-h-val');
         const maskOpacityVal = document.getElementById('mask-opacity-val');
-        const maskXVal = document.getElementById('mask-x-val');
-        const maskWVal = document.getElementById('mask-w-val');
+        const maskXVal = document.getElementById('mask-x-val'); 
+        const maskWVal = document.getElementById('mask-w-val'); 
         const subSizeVal = document.getElementById('sub-size-val');
+        const duckVolVal = document.getElementById('duck-vol-val');
         const videoTimer = document.getElementById('video-timer');
         const currentTimeLbl = document.getElementById('current-time-lbl');
         const totalDurationLbl = document.getElementById('total-duration-lbl');
+        const chunkInfoBadge = document.getElementById('chunk-info-badge');
 
         const btnPlayPause = document.getElementById('btn-play-pause');
         const btnStop = document.getElementById('btn-stop');
@@ -415,159 +501,487 @@
         const volumeSlider = document.getElementById('volume-slider');
         const btnMute = document.getElementById('btn-mute');
 
+        const segmentContainer = document.getElementById('segment-container');
+        const btnAddSegment = document.getElementById('btn-add-segment');
+        const btnOneClickMagic = document.getElementById('btn-one-click-magic');
+        const btnExport = document.getElementById('btn-export');
+        const voiceSelector = document.getElementById('voice-selector');
+
+        const previewModal = document.getElementById('preview-modal');
+        const renderedPreviewVideo = document.getElementById('rendered-preview-video');
+        const btnClosePreview = document.getElementById('btn-close-preview');
+        const btnReRender = document.getElementById('btn-re-render');
+        const btnFinalDownload = document.getElementById('btn-final-download');
+        const videoFileInfoLabel = document.getElementById('video-file-info-label');
+
         const toast = document.getElementById('notification-toast');
         const toastTitle = document.getElementById('toast-title');
         const toastBody = document.getElementById('toast-body');
+        const toastIcon = document.getElementById('toast-icon');
 
-        // Notification System
+        const progressModal = document.getElementById('progress-modal');
+        const progressTitle = document.getElementById('progress-title');
+        const progressDesc = document.getElementById('progress-desc');
+        const progressBarFill = document.getElementById('progress-bar-fill');
+        const progressPercent = document.getElementById('progress-percent');
+
+        // Thiha နှင့် Nilar အသံ Option များ ထည့်သွင်းပေးခြင်း
+        document.addEventListener('DOMContentLoaded', () => {
+            if(voiceSelector) {
+                voiceSelector.innerHTML = `
+                    <option value="my-MM-ThihaNeural" selected>Thiha (မြန်မာအမျိုးသားသံ)</option>
+                    <option value="my-MM-NilarNeural">Nilar (မြန်မာအမျိုးသမီးသံ)</option>
+                `;
+            }
+        });
+
+        // --- GLOBAL HOISTED UTILITIES ---
+        function wrapText(context, text, maxWidth) {
+            const words = text.split(" ");
+            let lines = [];
+            let currentLine = words[0] || "";
+
+            for (let i = 1; i < words.length; i++) {
+                const word = words[i];
+                const width = context.measureText(currentLine + " " + word).width;
+                if (width < maxWidth) {
+                    currentLine += " " + word;
+                } else {
+                    lines.push(currentLine);
+                    currentLine = word;
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
         function showToast(title, msg, type = 'info') {
-            toastTitle.innerText = title;
-            toastBody.innerText = msg;
+            toastTitle.innerText = title; toastBody.innerText = msg;
+            if (type === 'error') {
+                toastIcon.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-red-500 text-lg"></i>';
+                toastIcon.className = "text-red-500 mt-0.5";
+            } else if (type === 'success') {
+                toastIcon.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-500 text-lg"></i>';
+                toastIcon.className = "text-emerald-500 mt-0.5";
+            } else {
+                toastIcon.innerHTML = '<i class="fa-solid fa-circle-info text-amber-500 text-lg"></i>';
+                toastIcon.className = "text-amber-500 mt-0.5";
+            }
             toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 4000);
+            setTimeout(hideToast, 5000);
         }
 
-        // Setup Resolutions & Aspect Ratios
+        function hideToast() { toast.classList.add('translate-y-20', 'opacity-0'); }
+
+        function showProgress(title, desc, percent) {
+            progressModal.classList.remove('hidden');
+            progressTitle.innerText = title; progressDesc.innerText = desc;
+            progressBarFill.style.width = percent + '%'; progressPercent.innerText = percent + '%';
+        }
+
+        function hideProgress() { progressModal.classList.add('hidden'); }
+        function writeString(view, offset, string) { for (let i = 0; i < string.length; i++) { view.setUint8(offset + i, string.charCodeAt(i)); } }
+
         function updateCanvasDimensions() {
-            const aspect = presetSize.value;
-            const res = parseInt(presetResolution.value);
+            const aspect = presetSize.value; const res = parseInt(presetResolution.value);
             let width, height;
-
-            if (aspect === 'youtube') { height = res; width = Math.round(res * (16 / 9)); canvasWrapper.style.aspectRatio = "16/9"; }
-            else if (aspect === 'tiktok') { height = Math.round(res * (16 / 9)); width = res; canvasWrapper.style.aspectRatio = "9/16"; }
-            else if (aspect === 'facebook') { height = res; width = res; canvasWrapper.style.aspectRatio = "1/1"; }
-
-            editorCanvas.width = width;
-            editorCanvas.height = height;
-            triggerCanvasDraw();
-        }
-
-        // --- ပြင်ဆင်လိုက်သည့် အဓိက ဗီဒီယိုဖိုင်ဖတ်သည့်စနစ် (FIXED) ---
-        function handleFileSelected(e) {
-            const file = e.target.files[0];
-            if (file) { processVideoFile(file); }
-        }
-
-        function processVideoFile(file) {
-            videoFile = file;
-            showToast("ဖိုင်ရယူနေပါသည်", "ဗီဒီယိုဖိုင်ကို စနစ်ထဲသို့ ထည့်သွင်းနေပါသည်...", "info");
-            
-            const fileUrl = URL.createObjectURL(file);
-            coreVideo.src = fileUrl;
-            coreVideo.load();
-
-            // UI ပြောင်းလဲရန်
-            uploadPlaceholder.classList.add('hidden');
-            btnPlayPause.disabled = false;
-            btnStop.disabled = false;
-            timelineSlider.disabled = false;
-        }
-
-        function handleVideoLoaded() {
-            updateCanvasDimensions();
-            const duration = coreVideo.duration;
-            totalDurationLbl.innerText = formatTime(duration);
-            timelineSlider.max = Math.floor(duration);
-            document.getElementById('empty-state-notice')?.classList.add('hidden');
-            showToast("အောင်မြင်ပါသည်", "ဗီဒီယို တင်သွင်းမှု ပြီးမြောက်ပါပြီ။", "success");
-        }
-
-        function formatTime(secs) {
-            const m = Math.floor(secs / 60).toString().padStart(2, '0');
-            const s = Math.floor(secs % 60).toString().padStart(2, '0');
-            return `${m}:${s}`;
-        }
-
-        function togglePlayback() {
-            if (coreVideo.paused) { coreVideo.play(); } 
-            else { coreVideo.pause(); }
-        }
-
-        function stopPlayback() {
-            coreVideo.pause();
-            coreVideo.currentTime = 0;
-            triggerCanvasDraw();
-        }
-
-        function updatePlaybackTimeline() {
-            const curr = coreVideo.currentTime;
-            const dur = coreVideo.duration || 0;
-            currentTimeLbl.innerText = formatTime(curr);
-            videoTimer.innerText = `${formatTime(curr)} / ${formatTime(dur)}`;
-            timelineSlider.value = Math.floor(curr);
-            triggerCanvasDraw();
-        }
-
-        function triggerCanvasDraw() {
-            if (!coreVideo.src) return;
-            ctx.clearRect(0, 0, editorCanvas.width, editorCanvas.height);
-            
-            // Draw Video Frame
-            ctx.drawImage(coreVideo, 0, 0, editorCanvas.width, editorCanvas.height);
-            
-            // Draw Mask Overlay
-            if (maskEnable.checked) {
-                const maskYPosPct = parseInt(maskY.value) / 100;
-                const maskHeightPct = parseInt(maskHeight.value) / 100;
-                const maskXPct = parseInt(maskXPos.value) / 100;
-                const maskWidthPct = parseInt(maskWidth.value) / 100;
-
-                ctx.save();
-                ctx.globalAlpha = parseInt(maskOpacity.value) / 100;
-                ctx.fillStyle = maskColor.value;
-                ctx.fillRect(
-                    editorCanvas.width * maskXPct, 
-                    editorCanvas.height * maskYPosPct, 
-                    editorCanvas.width * maskWidthPct, 
-                    editorCanvas.height * maskHeightPct
-                );
-                ctx.restore();
+            if (aspect === 'youtube') {
+                height = res; width = Math.round(res * (16 / 9));
+                canvasWrapper.style.aspectRatio = "16/9"; canvasWrapper.style.width = "100%"; canvasWrapper.style.height = "auto";
+            } else if (aspect === 'tiktok') {
+                height = Math.round(res * (16 / 9)); width = res;
+                canvasWrapper.style.aspectRatio = "9/16"; canvasWrapper.style.width = "auto"; canvasWrapper.style.height = "450px";
+            } else if (aspect === 'facebook') {
+                height = res; width = res;
+                canvasWrapper.style.aspectRatio = "1/1"; canvasWrapper.style.width = "auto"; canvasWrapper.style.height = "400px";
             }
-
-            // Draw Logo Watermark
-            if (logoEnable.checked) {
-                ctx.save();
-                ctx.globalAlpha = parseInt(logoOpacity.value) / 100;
-                ctx.fillStyle = "#ffffff";
-                ctx.font = "bold 16px sans-serif";
-                
-                let lx = 20, ly = 40;
-                if (logoPosition.value === 'top-right') { lx = editorCanvas.width - ctx.measureText(logoText.value).width - 20; }
-                else if (logoPosition.value === 'bottom-left') { ly = editorCanvas.height - 30; }
-                else if (logoPosition.value === 'bottom-right') { lx = editorCanvas.width - ctx.measureText(logoText.value).width - 20; ly = editorCanvas.height - 30; }
-                
-                ctx.fillText(logoText.value, lx, ly);
-                ctx.restore();
-            }
+            editorCanvas.width = width; editorCanvas.height = height;
+            triggerCanvasDraw();
         }
 
         function initEvents() {
             uploadPlaceholder.addEventListener('click', () => videoUploader.click());
             videoUploader.addEventListener('change', handleFileSelected);
-            
+            uploadPlaceholder.addEventListener('dragover', (e) => { e.preventDefault(); uploadPlaceholder.classList.add('border-amber-500', 'bg-gray-900/90'); });
+            uploadPlaceholder.addEventListener('dragleave', () => { uploadPlaceholder.classList.remove('border-amber-500', 'bg-gray-900/90'); });
+            uploadPlaceholder.addEventListener('drop', (e) => { e.preventDefault(); uploadPlaceholder.classList.remove('border-amber-500', 'bg-gray-900/90'); if (e.dataTransfer.files.length > 0) { processVideoFile(e.dataTransfer.files[0]); } });
+
             btnPlayPause.addEventListener('click', togglePlayback);
             btnStop.addEventListener('click', stopPlayback);
             coreVideo.addEventListener('timeupdate', updatePlaybackTimeline);
             coreVideo.addEventListener('loadedmetadata', handleVideoLoaded);
             coreVideo.addEventListener('seeked', triggerCanvasDraw);
-            
+            coreVideo.addEventListener('play', () => { btnPlayPause.innerHTML = `<i class="fa-solid fa-pause"></i>`; });
+            coreVideo.addEventListener('pause', () => { btnPlayPause.innerHTML = `<i class="fa-solid fa-play"></i>`; });
+
             timelineSlider.addEventListener('input', (e) => {
-                coreVideo.currentTime = e.target.value;
+                const targetTime = (e.target.value / 100) * coreVideo.duration; coreVideo.currentTime = targetTime;
+                if (isMasterPlaying) playMasterAudio(targetTime);
             });
+
+            volumeSlider.addEventListener('input', (e) => {
+                coreVideo.volume = e.target.value; btnMute.innerHTML = e.target.value == 0 ? `<i class="fa-solid fa-volume-mute"></i>` : `<i class="fa-solid fa-volume-high"></i>`;
+            });
+
+            presetSize.addEventListener('change', updateCanvasDimensions);
+            presetResolution.addEventListener('change', updateCanvasDimensions);
+            maskEnable.addEventListener('change', triggerCanvasDraw);
+            maskColor.addEventListener('change', triggerCanvasDraw);
+            subColor.addEventListener('change', triggerCanvasDraw);
+            logoEnable.addEventListener('change', triggerCanvasDraw);
+            logoText.addEventListener('input', triggerCanvasDraw);
+            logoPosition.addEventListener('change', triggerCanvasDraw);
+            logoOpacity.addEventListener('input', triggerCanvasDraw);
 
             maskY.addEventListener('input', (e) => { maskYVal.innerText = `${e.target.value}%`; triggerCanvasDraw(); });
             maskHeight.addEventListener('input', (e) => { maskHVal.innerText = `${e.target.value}%`; triggerCanvasDraw(); });
             maskOpacity.addEventListener('input', (e) => { maskOpacityVal.innerText = `${e.target.value}%`; triggerCanvasDraw(); });
             maskXPos.addEventListener('input', (e) => { maskXVal.innerText = `${e.target.value}%`; triggerCanvasDraw(); });
             maskWidth.addEventListener('input', (e) => { maskWVal.innerText = `${e.target.value}%`; triggerCanvasDraw(); });
-            presetSize.addEventListener('change', updateCanvasDimensions);
-            presetResolution.addEventListener('change', updateCanvasDimensions);
+            subSize.addEventListener('input', (e) => { subSizeVal.innerText = `${e.target.value}px`; triggerCanvasDraw(); });
+            duckVolume.addEventListener('input', (e) => { duckVolVal.innerText = `${e.target.value}%`; });
+
+            btnAddSegment.addEventListener('click', () => addSegment());
+            btnOneClickMagic.addEventListener('click', executeOneClickMagic);
+            btnExport.addEventListener('click', exportProcessedVideo);
+            btnClosePreview.addEventListener('click', closePreviewModal);
+            btnFinalDownload.addEventListener('click', downloadFinalVideo);
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            initEvents();
-            updateCanvasDimensions();
-        });
+        function handleFileSelected(e) { if (e.target.files.length > 0) { processVideoFile(e.target.files[0]); } }
+
+        async function processVideoFile(file) {
+            videoFile = file; showProgress("ဗီဒီယိုဖိုင် ဖတ်နေသည်", "စနစ်ထဲသို့ ဗီဒီယိုဖိုင် ထည့်သွင်းနေပါသည်...", 30);
+            try {
+                videoArrayBuffer = await file.arrayBuffer();
+                const playBlob = new Blob([videoArrayBuffer], { type: file.type });
+                coreVideo.src = URL.createObjectURL(playBlob); coreVideo.load();
+                uploadPlaceholder.classList.add('hidden');
+                btnPlayPause.disabled = false; btnStop.disabled = false; timelineSlider.disabled = false;
+                hideProgress(); showToast("ဗီဒီယိုဖိုင် တင်သွင်းပြီးပါပြီ", `"${file.name}" အောင်မြင်ပါပြီ။`, "success");
+            } catch (err) { hideProgress(); console.error(err); showToast("ဖိုင်ဖတ်ရန် အဆင်မပြေပါ", "ဗီဒီယိုဖိုင်ကို ပြန်စစ်ပေးပါ။", "error"); }
+        }
+
+        function handleVideoLoaded() {
+            updateCanvasDimensions(); updatePlaybackTimeline();
+            if (coreVideo.duration > 180) { chunkInfoBadge.classList.remove('hidden'); } else { chunkInfoBadge.classList.add('hidden'); }
+            coreVideo.currentTime = 0.001;
+            coreVideo.addEventListener('loadeddata', () => { triggerCanvasDraw(); }, { once: true });
+        }
+
+        function togglePlayback() {
+            if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            if (coreVideo.paused) {
+                isMasterPlaying = true; btnPlayPause.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+                playMasterAudio(coreVideo.currentTime); coreVideo.play(); renderLoop();
+            } else { pausePlayback(); }
+        }
+
+        function pausePlayback() { isMasterPlaying = false; coreVideo.pause(); btnPlayPause.innerHTML = `<i class="fa-solid fa-play"></i>`; pauseMasterAudio(); }
+        function stopPlayback() { isMasterPlaying = false; coreVideo.pause(); coreVideo.currentTime = 0; btnPlayPause.innerHTML = `<i class="fa-solid fa-play"></i>`; pauseMasterAudio(); triggerCanvasDraw(); }
+
+        function updatePlaybackTimeline() {
+            const current = coreVideo.currentTime; const duration = coreVideo.duration || 0;
+            const formatTime = (time) => { const mins = Math.floor(time / 60); const secs = Math.floor(time % 60); const ms = Math.floor((time % 1) * 10); return `${mins}:${secs < 10 ? '0' : ''}${secs}.${ms}`; };
+            videoTimer.innerText = `${formatTime(current)} / ${formatTime(duration)}`;
+            currentTimeLbl.innerText = formatTime(current).split('.')[0]; totalDurationLbl.innerText = formatTime(duration).split('.')[0];
+            if (!coreVideo.paused) timelineSlider.value = duration > 0 ? (current / duration) * 100 : 0;
+            highlightActiveTimelineSegment(current);
+        }
+
+        function renderLoop() { if (isMasterPlaying && !coreVideo.paused && !coreVideo.ended) { triggerCanvasDraw(); requestAnimationFrame(renderLoop); } }
+
+        function triggerCanvasDraw() {
+            if (!coreVideo.src) {
+                ctx.fillStyle = "#111827"; ctx.fillRect(0, 0, editorCanvas.width, editorCanvas.height);
+                ctx.font = "bold 16px Padauk, Inter"; ctx.fillStyle = "#4b5563"; ctx.textAlign = "center";
+                ctx.fillText("ဗီဒီယိုဖိုင် ထည့်သွင်းပြီးမှသာ Preview မြင်တွေ့ရပါမည်", editorCanvas.width / 2, editorCanvas.height / 2); return;
+            }
+            const canvasRatio = editorCanvas.width / editorCanvas.height; const videoRatio = coreVideo.videoWidth / coreVideo.videoHeight;
+            let drawWidth, drawHeight, drawX, drawY;
+            if (videoRatio > canvasRatio) { drawWidth = editorCanvas.width; drawHeight = editorCanvas.width / videoRatio; drawX = 0; drawY = (editorCanvas.height - drawHeight) / 2; }
+            else { drawHeight = editorCanvas.height; drawWidth = editorCanvas.height * videoRatio; drawX = (editorCanvas.width - drawWidth) / 2; drawY = 0; }
+
+            ctx.fillStyle = "#000000"; ctx.fillRect(0, 0, editorCanvas.width, editorCanvas.height);
+            ctx.drawImage(coreVideo, drawX, drawY, drawWidth, drawHeight);
+            const activeSegment = findActiveSegment(coreVideo.currentTime);
+
+            if (maskEnable.checked) {
+                const maskXPosition = (maskXPos.value / 100) * editorCanvas.width; const maskYPosition = (maskY.value / 100) * editorCanvas.height;
+                const maskWidthPix = (maskWidth.value / 100) * editorCanvas.width; const maskHeightPix = (maskHeight.value / 100) * editorCanvas.height;
+                ctx.save(); ctx.globalAlpha = maskOpacity.value / 100; ctx.fillStyle = maskColor.value; ctx.fillRect(maskXPosition, maskYPosition, maskWidthPix, maskHeightPix); ctx.restore();
+            }
+
+            if (logoEnable.checked && logoText.value.trim() !== "") {
+                ctx.save(); const fontSize = Math.max(12, editorCanvas.height * 0.04); ctx.font = `bold ${fontSize}px 'Inter', sans-serif`; ctx.fillStyle = "#ffffff"; ctx.globalAlpha = logoOpacity.value / 100;
+                let logoX = 20; let logoY = fontSize + 15; const textWidth = ctx.measureText(logoText.value).width;
+                if (logoPosition.value === "top-right") logoX = editorCanvas.width - textWidth - 20;
+                else if (logoPosition.value === "bottom-left") { logoX = 20; logoY = editorCanvas.height - 25; }
+                else if (logoPosition.value === "bottom-right") { logoX = editorCanvas.width - textWidth - 20; logoY = editorCanvas.height - 25; }
+                ctx.fillStyle = "rgba(0, 0, 0, 0.4)"; ctx.fillRect(logoX - 8, logoY - fontSize, textWidth + 16, fontSize + 8);
+                ctx.fillStyle = "#f59e0b"; ctx.fillText(logoText.value, logoX, logoY - 2); ctx.restore();
+            }
+
+            if (activeSegment) {
+                ctx.save(); const fontSize = (subSize.value / 400) * editorCanvas.height; ctx.font = `bold ${fontSize}px 'Padauk', sans-serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+                const renderText = activeSegment.myanmar || ""; const maxTextWidth = drawWidth * 0.90; const lines = wrapText(ctx, renderText, maxTextWidth);
+                const maskYPosition = (maskY.value / 100) * editorCanvas.height; const maskHeightPix = (maskHeight.value / 100) * editorCanvas.height;
+                const maskCenterY = maskYPosition + (maskHeightPix / 2); const lineHeight = fontSize * 1.25; const startY = maskCenterY - ((lines.length - 1) * lineHeight) / 2;
+                lines.forEach((lineText, lineIdx) => {
+                    const currentY = startY + (lineIdx * lineHeight); const currentX = drawX + (drawWidth / 2);
+                    ctx.strokeStyle = "#000000"; ctx.lineWidth = Math.max(3.5, fontSize * 0.2); ctx.strokeText(lineText, currentX, currentY);
+                    ctx.fillStyle = subColor.value; ctx.fillText(lineText, currentX, currentY);
+                });
+                ctx.restore();
+            }
+        }
+
+        function findActiveSegment(time) { return timelineSegments.find(seg => time >= seg.start && time <= seg.end); }
+
+        function playMasterAudio(offset) {
+            if (masterAudioSource) { try { masterAudioSource.stop(); } catch(e) {} }
+            if (!masterAudioBuffer || !audioContext) return;
+            masterAudioSource = audioContext.createBufferSource(); masterAudioSource.buffer = masterAudioBuffer;
+            masterAudioSource.connect(audioContext.destination); masterAudioStartTime = audioContext.currentTime;
+            masterAudioStartOffset = offset; masterAudioSource.start(0, offset);
+        }
+
+        function pauseMasterAudio() { if (masterAudioSource) { try { masterAudioSource.stop(); } catch(e) {} masterAudioSource = null; } }
+
+        // --- 🎙️ AUDIO CORE CONVERTER & API SYSTEMS ---
+        async function extractVideoAudioTrack() {
+            if (!videoArrayBuffer) return null;
+            const tempCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const audioBuffer = await tempCtx.decodeAudioData(videoArrayBuffer.slice(0));
+            const targetSampleRate = 16000;
+            const offlineCtx = new OfflineAudioContext(1, audioBuffer.duration * targetSampleRate, targetSampleRate);
+            const source = offlineCtx.createBufferSource(); source.buffer = audioBuffer; source.connect(offlineCtx.destination); source.start();
+            const renderedBuffer = await offlineCtx.startRendering(); tempCtx.close();
+            return createWavBlob(renderedBuffer.getChannelData(0), targetSampleRate);
+        }
+
+        function createWavBlob(samples, sampleRate) {
+            const buffer = new ArrayBuffer(44 + samples.length * 2); const view = new DataView(buffer);
+            writeString(view, 0, 'RIFF'); view.setUint32(4, 36 + samples.length * 2, true); writeString(view, 8, 'WAVE'); writeString(view, 12, 'fmt ');
+            view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, 1, true); view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * 2, true); view.setUint16(32, 2, true); view.setUint16(34, 16, true); writeString(view, 36, 'data'); view.setUint32(40, samples.length * 2, true);
+            let offset = 44;
+            for (let i = 0; i < samples.length; i++, offset += 2) {
+                let s = Math.max(-1, Math.min(1, samples[i])); view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+            }
+            return new Blob([buffer], { type: 'audio/wav' });
+        }
+
+        async function callGroqWhisperAPI(audioBlob) {
+            const currentKey = getGroqKey();
+            if(!currentKey) throw new Error("Groq API Key ရိုက်ထည့်ရန် လိုအပ်ပါသည်!");
+
+            const formData = new FormData();
+            formData.append("file", audioBlob, "audio.wav"); formData.append("model", "whisper-large-v3"); formData.append("response_format", "verbose_json");
+
+            const response = await fetch("https://api.groq.com/openai/v1/audio/transcriptions", {
+                method: "POST", headers: { "Authorization": `Bearer ${currentKey}` }, body: formData
+            });
+            if (!response.ok) throw new Error("Groq Error: " + response.statusText);
+            const data = await response.json(); return data.segments || [];
+        }
+
+        async function translateSegmentsWithGemini(groqSegments) {
+            const currentKey = getGeminiKey();
+            if(!currentKey) throw new Error("Gemini API Key ရိုက်ထည့်ရန် လိုအပ်ပါသည်!");
+
+            const simplifiedSegments = groqSegments.map(s => ({ start: s.start, end: s.end, text: s.text }));
+            const prompt = `You are an elite movie recap channel voice actor. Translate and adapt these raw timestamped data into a highly catching, thrilling, and natural spoken Burmese (Myanmar) movie recap script.
+            CRITICAL OUTPUT LAWS:
+            1. Every segment's Myanmar text MUST be very short and punchy (Max 5-7 words) to perfectly fit on ONE SINGLE line without line wraps.
+            2. Keep the exact 'start' and 'end' numeric timestamps unchanged.
+            3. Output data strictly as a valid JSON array of objects only.
+
+            Data: ${JSON.stringify(simplifiedSegments)}`;
+
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${currentKey}`, {
+                method: "POST", headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: prompt }] }],
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                        responseSchema: {
+                            type: "ARRAY",
+                            items: {
+                                type: "OBJECT",
+                                properties: { start: { type: "NUMBER" }, end: { type: "NUMBER" }, myanmar: { type: "STRING" } },
+                                required: ["start", "end", "myanmar"]
+                            }
+                        }
+                    }
+                })
+            });
+            if (!response.ok) throw new Error("Gemini API Failed.");
+            const result = await response.json(); return JSON.parse(result.candidates?.[0]?.content?.parts?.[0]?.text);
+        }
+
+        async function fetchFreeEdgeTTS(text, voiceName) {
+            const ssml = `<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='my-MM'><voice name='${voiceName}'><prosody pitch='+0Hz' rate='+15%'>${text}</prosody></voice></speak>`;
+            const response = await fetch("https://api.vvebb.com/tts", {
+                method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ssml: ssml, voice: voiceName })
+            });
+            if (!response.ok) {
+                const backupUrl = `https://api.vvebb.com/tts?voice=${voiceName}&text=${encodeURIComponent(text)}&rate=1.15`;
+                const resBackup = await fetch(backupUrl);
+                if (!resBackup.ok) throw new Error("Edge TTS Stream Down.");
+                return URL.createObjectURL(await resBackup.blob());
+            }
+            return URL.createObjectURL(await response.blob());
+        }
+
+        async function buildMasterAudio() {
+            if (!videoArrayBuffer) return;
+            showProgress("Master Audio Synthesis", "မူရင်းဗီဒီယို နောက်ခံအသံများကို ပြင်ဆင်နေပါသည်...", 85);
+            if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            let originalBuffer = null;
+            try { originalBuffer = await audioContext.decodeAudioData(videoArrayBuffer.slice(0)); } catch(e) {}
+
+            const rate = audioContext.sampleRate; const duration = coreVideo.duration || 1;
+            masterAudioBuffer = audioContext.createBuffer(1, Math.ceil(rate * duration), rate);
+            const masterData = masterAudioBuffer.getChannelData(0);
+
+            if (!muteOriginalAudioToggle.checked && originalBuffer) {
+                const origData = originalBuffer.getChannelData(0);
+                for(let i=0; i<Math.min(masterData.length, origData.length); i++) { masterData[i] = origData[i] * (parseFloat(duckVolume.value) / 100); }
+            }
+
+            for (let seg of timelineSegments) {
+                const url = ttsAudioCache[seg.id]; if (!url) continue;
+                try {
+                    const res = await fetch(url); const ab = await res.arrayBuffer(); const ttsBuf = await audioContext.decodeAudioData(ab);
+                    const ttsData = ttsBuf.getChannelData(0); let startSample = Math.round(seg.start * rate);
+                    for (let i = 0; i < ttsData.length; i++) { if (startSample + i < masterData.length) masterData[startSample + i] += ttsData[i]; }
+                } catch(e) {}
+            }
+            hideProgress();
+        }
+
+        // --- ONE-CLICK AUTOMATION CONTROL WORKFLOW ---
+        async function executeOneClickMagic() {
+            if (!videoFile) { showToast("ဗီဒီယို လိုအပ်ပါသည်", "ဗီဒီယိုဖိုင် အရင်ထည့်သွင်းပေးပါ။", "error"); return; }
+            if (!getGroqKey() || !getGeminiKey()) { showToast("API Keys လိုအပ်သည်", "အပေါ်ဆုံးဘားတွင် Groq နှင့် Gemini Key များကို အရင်ဖြည့်သွင်းပါ!", "error"); return; }
+
+            try {
+                showProgress("AI Magic Studio", "ဗီဒီယိုမှ အသံလှိုင်းများကို သန့်စင်ထုတ်ယူနေပါသည်...", 15);
+                const audioWavBlob = await extractVideoAudioTrack();
+                
+                showProgress("Groq Whisper Rendering", "Groq AI စနစ်ဖြင့် မူရင်းစကားလုံးများကို နားထောင်မှတ်သားနေပါသည်...", 40);
+                const groqSegments = await callGroqWhisperAPI(audioWavBlob);
+                
+                showProgress("Gemini Script Adapting", "Gemini ဖြင့် ဆွဲဆောင်မှုရှိသော မြန်မာဇာတ်လမ်းပြောဇာတ်ညွှန်း ပြောင်းလဲနေပါသည်...", 65);
+                const translated = await translateSegmentsWithGemini(groqSegments);
+                
+                timelineSegments = translated.map(t => ({ id: crypto.randomUUID(), start: t.start, end: t.end, myanmar: t.myanmar }));
+                const selectedVoice = voiceSelector.value;
+                showProgress("Edge TTS Synthesis", "Thiha / Nilar အသံလှိုင်းများကို ထုတ်လုပ်နေပါသည်...", 80);
+                
+                for(let seg of timelineSegments) { ttsAudioCache[seg.id] = await fetchFreeEdgeTTS(seg.myanmar, selectedVoice); }
+
+                await buildMasterAudio(); renderTimelineGrid(); triggerCanvasDraw();
+                showToast("Recap ဖန်တီးမှုပြီးပါပြီ!", "စာတန်းထိုးနှင့် မြန်မာအသံနောက်ခံ ကွက်တိတပ်ဆင်ပြီးပါပြီ။", "success");
+                stopPlayback(); togglePlayback();
+            } catch (err) { console.error(err); hideProgress(); showToast("Error အမှားရှိပါသည်", err.message, "error"); }
+        }
+
+        function renderTimelineGrid() {
+            if (timelineSegments.length === 0) { document.getElementById('empty-state-notice').classList.remove('hidden'); return; }
+            document.getElementById('empty-state-notice').classList.add('hidden'); segmentContainer.innerHTML = '';
+            timelineSegments.forEach((seg, idx) => {
+                const card = document.createElement('div'); card.className = 'p-3 rounded-xl border border-gray-800 bg-gray-900/40 space-y-3 relative'; card.id = `segment-card-${seg.id}`;
+                card.innerHTML = `
+                    <div class="flex items-center justify-between text-[11px] text-gray-400">
+                        <span class="font-bold flex items-center gap-1 text-white"><span class="w-4 h-4 rounded-full bg-amber-500 flex items-center justify-center text-[10px] text-black font-bold">${idx + 1}</span> Timing Block</span>
+                        <div class="flex items-center space-x-2">
+                            <input type="number" step="0.1" value="${seg.start}" onchange="updateSegmentProp('${seg.id}', 'start', this.value)" class="w-12 bg-gray-950 border border-gray-800 px-1 py-0.5 rounded text-center text-amber-400 font-mono text-xs">
+                            <span>to</span>
+                            <input type="number" step="0.1" value="${seg.end}" onchange="updateSegmentProp('${seg.id}', 'end', this.value)" class="w-12 bg-gray-950 border border-gray-800 px-1 py-0.5 rounded text-center text-amber-400 font-mono text-xs">
+                            <button onclick="deleteSegment('${seg.id}')" class="text-gray-500 hover:text-red-400 transition-colors pl-1"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <textarea onchange="updateSegmentProp('${seg.id}', 'myanmar', this.value)" rows="2" class="w-full bg-gray-950/80 border border-gray-800 p-2 rounded-lg text-xs outline-none text-white font-medium resize-none">${seg.myanmar}</textarea>
+                `;
+                segmentContainer.appendChild(card);
+            });
+        }
+
+        function highlightActiveTimelineSegment(time) {
+            timelineSegments.forEach((seg) => {
+                const card = document.getElementById(`segment-card-${seg.id}`); if (!card) return;
+                if (time >= seg.start && time <= seg.end) card.classList.add('border-amber-500', 'bg-amber-500/5');
+                else card.classList.remove('border-amber-500', 'bg-amber-500/5');
+            });
+        }
+
+        function addSegment() {
+            const last = timelineSegments[timelineSegments.length - 1]; const start = last ? parseFloat(last.end) : 0;
+            timelineSegments.push({ id: crypto.randomUUID(), start: start, end: start + 4, myanmar: 'စာတန်းအသစ်' }); renderTimelineGrid();
+        }
+        function deleteSegment(id) { timelineSegments = timelineSegments.filter(s => s.id !== id); renderTimelineGrid(); }
+        function updateSegmentProp(id, prop, val) { const seg = timelineSegments.find(s => s.id === id); if (seg) seg[prop] = (prop==='start' || prop==='end') ? parseFloat(val) : val; triggerCanvasDraw(); }
+
+        // --- 🎬 EXPORT & AUTOMATED SHIELD CHUNKER ---
+        async function exportProcessedVideo() {
+            if (!videoFile) return; await buildMasterAudio(); const totalDuration = coreVideo.duration;
+            if (totalDuration > 120) { await renderStitchedVideoInChunks(totalDuration, 120); }
+            else {
+                showProgress("Rendering Video", "ရုပ်ရှင်ဗီဒီယိုနှင့် အသံလှိုင်းများကို ပေါင်းစပ်နေပါသည်...", 20); stopPlayback();
+                const videoStream = editorCanvas.captureStream(24); const dest = audioContext.createMediaStreamDestination();
+                const bufferSource = audioContext.createBufferSource(); bufferSource.buffer = masterAudioBuffer; bufferSource.connect(dest);
+                const mixedStream = new MediaStream([videoStream.getVideoTracks()[0], dest.stream.getAudioTracks()[0]]);
+                bufferSource.start(0); startMediaRecording(mixedStream);
+            }
+        }
+
+        async function renderStitchedVideoInChunks(totalDuration, chunkDuration = 120) {
+            stopPlayback(); const chunkCount = Math.ceil(totalDuration / chunkDuration); const recordedChunksData = [];
+            for (let i = 0; i < chunkCount; i++) {
+                const startTime = i * chunkDuration; const endTime = Math.min((i + 1) * chunkDuration, totalDuration);
+                showProgress("Chunk Export", `အပိုင်း ${i+1}/${chunkCount} အား တည်ဆောက်နေပါသည်...`, Math.round((i/chunkCount)*100));
+                coreVideo.currentTime = startTime; await new Promise(r => coreVideo.addEventListener('seeked', r, { once: true }));
+                const videoStream = editorCanvas.captureStream(24); const dest = audioContext.createMediaStreamDestination();
+                const bufferSource = audioContext.createBufferSource(); bufferSource.buffer = masterAudioBuffer; bufferSource.connect(dest);
+                const mixedStream = new MediaStream([videoStream.getVideoTracks()[0], dest.stream.getAudioTracks()[0]]);
+                bufferSource.start(0, startTime);
+                const chunkBlob = await recordSegmentStream(mixedStream, bufferSource, startTime, endTime); recordedChunksData.push(chunkBlob);
+            }
+            finalRenderedBlobUrl = URL.createObjectURL(new Blob(recordedChunksData, { type: 'video/webm' })); hideProgress(); openPreviewModal(finalRenderedBlobUrl);
+        }
+
+        function recordSegmentStream(streamSource, audioSourceNode, segmentStart, segmentEnd) {
+            return new Promise((resolve) => {
+                let chunks = []; const recorder = new MediaRecorder(streamSource, { mimeType: 'video/webm;codecs=vp8,opus' });
+                recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); }; recorder.onstop = () => resolve(new Blob(chunks, { type: 'video/webm' }));
+                recorder.start(); coreVideo.currentTime = segmentStart; coreVideo.play();
+                const interval = setInterval(() => {
+                    if (coreVideo.currentTime >= segmentEnd || coreVideo.ended) { clearInterval(interval); try { audioSourceNode.stop(); } catch(e) {} coreVideo.pause(); recorder.stop(); }
+                    else { triggerCanvasDraw(); }
+                }, 41);
+            });
+        }
+
+        function startMediaRecording(streamSource) {
+            let chunks = []; const recorder = new MediaRecorder(streamSource, { mimeType: 'video/webm;codecs=vp8,opus' });
+            recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+            recorder.onstop = () => { finalRenderedBlobUrl = URL.createObjectURL(new Blob(chunks, { type: 'video/webm' })); hideProgress(); openPreviewModal(finalRenderedBlobUrl); };
+            recorder.start(); coreVideo.currentTime = 0; coreVideo.play();
+            const interval = setInterval(() => { if (coreVideo.ended || coreVideo.paused) { clearInterval(interval); recorder.stop(); } else { triggerCanvasDraw(); } }, 41);
+        }
+
+        function openPreviewModal(blobUrl) { renderedPreviewVideo.src = blobUrl; renderedPreviewVideo.load(); previewModal.classList.remove('hidden'); }
+        function closePreviewModal() { renderedPreviewVideo.pause(); previewModal.classList.add('hidden'); }
+
+        function downloadFinalVideo() {
+            if (!finalRenderedBlobUrl) return;
+            const link = document.createElement('a'); link.href = finalRenderedBlobUrl; link.download = `recap_final_${presetSize.value}_${presetResolution.value}p.webm`;
+            document.body.appendChild(link); link.click(); document.body.removeChild(link); closePreviewModal();
+        }
+
+        document.addEventListener('DOMContentLoaded', initEvents);
     </script>
 </body>
 </html>
