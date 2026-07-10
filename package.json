@@ -1,0 +1,10 @@
+{
+  "name": "ai-movie-recap-studio",
+  "version": "1.0.0",
+  "description": "AI Movie Recap Studio with External API Key Input",
+  "main": "index.html",
+  "scripts": {
+    "start": "echo 'No build step required for client-side studio' && exit 0"
+  },
+  "dependencies": {}
+}
