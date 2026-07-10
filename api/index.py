@@ -51,7 +51,8 @@ def generate():
         asyncio.run(_generate())
     except Exception as e:
         logger.error("TTS Error: %s", e)
-        if os.path.path.exists(output_path):
+        # အောက်ပါလိုင်းတွင် os.path.path.exists ဖြစ်နေသည်ကို os.path.exists ဟု ပြင်ဆင်ထားပါသည်
+        if os.path.exists(output_path):
             os.remove(output_path)
         return jsonify({"error": "Audio generation failed."}), 500
         
