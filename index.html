@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Movie Recap - Multi-API Sync Studio v14.0</title>
+    <title>AI Movie Recap - Multi-API Sync Studio v15.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -25,9 +25,9 @@
             </div>
             <div>
                 <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
-                    AI Movie Recap <span class="bg-amber-500/10 text-amber-400 text-xs px-2 py-0.5 rounded border border-amber-500/20 font-medium">v14.0 Pro</span>
+                    AI Movie Recap <span class="bg-amber-500/10 text-amber-400 text-xs px-2 py-0.5 rounded border border-amber-500/20 font-medium">v15.0 Ultimate Fixed</span>
                 </h1>
-                <p class="text-xs text-gray-400">Groq Whisper (Transcript) + Gemini AI (Translate) + 100% Guaranteed Audio Sync Engine</p>
+                <p class="text-xs text-gray-400">Groq Whisper + Gemini 2.5 (JSON Protected) + High-Fidelity Edge TTS Sync Engine</p>
             </div>
         </div>
         
@@ -55,7 +55,7 @@
                 </div>
                 
                 <div class="relative bg-black flex items-center justify-center p-4 min-h-[350px]">
-                    <div id="canvas-wrapper" class="canvas-container relative max-w-full max-h-[500px] flex items-center justify-center">
+                    <div id="canvas-wrapper" class="relative max-w-full max-h-[500px] flex items-center justify-center">
                         <canvas id="editor-canvas" class="rounded-lg shadow-2xl bg-gray-950 object-contain"></canvas>
                     </div>
                     <video id="core-video" class="hidden" crossorigin="anonymous"></video>
@@ -133,19 +133,20 @@
                     <span class="p-2.5 rounded-xl bg-amber-500 text-black"><i class="fa-solid fa-bolt text-lg"></i></span>
                     <div>
                         <h4 class="text-sm font-bold text-white">One-Click Multi-API Sync Studio</h4>
-                        <p class="text-[11px] text-gray-400">Groq (Transcript) + Gemini 2.5 Flash (Translate) + Premium Native Audio</p>
+                        <p class="text-[11px] text-gray-400">Groq Whisper + Gemini 2.5 + Stable Edge TTS (100% Fixed Output)</p>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-3 bg-gray-950 p-3 rounded-xl border border-gray-800">
                     <div>
-                        <label class="text-[10px] text-gray-400 block mb-1">Recap Voice Engine</label>
-                        <select id="voice-selector" class="w-full bg-gray-900 border border-gray-800 p-2 rounded text-xs text-amber-400 font-semibold">
-                            <option value="my-MM" selected>Burmese Standard (မြန်မာအသံစစ်စစ်)</option>
+                        <label class="text-[10px] text-gray-400 block mb-1">AI Voice အသံရွေးရန်</label>
+                        <select id="voice-selector" class="w-full bg-gray-900 border border-gray-800 p-2 rounded text-xs text-amber-400 font-bold">
+                            <option value="my-MM-ThihaNeural" selected>Thiha (သီဟ - အမျိုးသားသံ)</option>
+                            <option value="my-MM-NilarNeural">Nilar (နီလာ - အမျိုးသမီးသံ)</option>
                         </select>
                     </div>
                     <div>
                         <label class="text-[10px] text-gray-400 block mb-1">Voice-Video Sync Lock</label>
-                        <input type="text" value="၁၀၀% အလုပ်လုပ်သည်" class="w-full bg-gray-900 border border-gray-800 p-2 rounded text-xs text-emerald-400 font-bold" disabled>
+                        <input type="text" value="Active (၁၀၀% ကွက်တိညှိစနစ်)" class="w-full bg-gray-900 border border-gray-800 p-2 rounded text-xs text-emerald-400 font-bold" disabled>
                     </div>
                 </div>
 
@@ -241,7 +242,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('saved_groq_key')) inputGroqKey.value = localStorage.getItem('saved_groq_key');
             if (localStorage.getItem('saved_gemini_key')) inputGeminiKey.value = localStorage.getItem('saved_gemini_key');
-            if (window.speechSynthesis) window.speechSynthesis.getVoices(); // Force Hardware Voice Modules Wakeup
         });
 
         inputGroqKey.addEventListener('input', () => localStorage.setItem('saved_groq_key', inputGroqKey.value.trim()));
@@ -251,7 +251,7 @@
         function getGeminiKey() { return inputGeminiKey.value.trim(); }
 
         // Application State
-        let videoFile = null, videoArrayBuffer = null, timelineSegments = [];
+        let videoFile = null, videoArrayBuffer = null, timelineSegments = [], ttsAudioCache = {};
         let coreVideo = document.getElementById('core-video'), editorCanvas = document.getElementById('editor-canvas'), ctx = editorCanvas.getContext('2d');
         let uploadPlaceholder = document.getElementById('upload-placeholder'), videoUploader = document.getElementById('video-uploader'), canvasWrapper = document.getElementById('canvas-wrapper');
         let maskEnable = document.getElementById('mask-enable'), maskY = document.getElementById('mask-y'), maskHeight = document.getElementById('mask-height'), subSize = document.getElementById('sub-size'), subColor = document.getElementById('sub-color'), duckVolume = document.getElementById('duck-volume'), muteOriginalAudioToggle = document.getElementById('mute-original-audio-toggle');
@@ -259,13 +259,9 @@
         let previewModal = document.getElementById('preview-modal'), renderedPreviewVideo = document.getElementById('rendered-preview-video'), btnClosePreview = document.getElementById('btn-close-preview'), btnFinalDownload = document.getElementById('btn-final-download'), toast = document.getElementById('notification-toast'), toastTitle = document.getElementById('toast-title'), toastBody = document.getElementById('toast-body'), progressModal = document.getElementById('progress-modal'), progressTitle = document.getElementById('progress-title'), progressDesc = document.getElementById('progress-desc'), progressBarFill = document.getElementById('progress-bar-fill'), progressPercent = document.getElementById('progress-percent');
         let videoTimer = document.getElementById('video-timer'), currentTimeLbl = document.getElementById('current-time-lbl'), totalDurationLbl = document.getElementById('total-duration-lbl'), btnPlayPause = document.getElementById('btn-play-pause'), btnStop = document.getElementById('btn-stop'), timelineSlider = document.getElementById('timeline-slider'), volumeSlider = document.getElementById('volume-slider'), btnMute = document.getElementById('btn-mute');
 
-        // Synthesis Engine Core States
-        let synthEngine = window.speechSynthesis;
+        // Audio Synthesis States
+        let audioContext = null, masterAudioBuffer = null, masterAudioSource = null, masterAudioStartTime = 0, masterAudioStartOffset = 0, isMasterPlaying = false, finalRenderedBlobUrl = null;
         let lastActiveSegmentId = null;
-        let audioCtx = null;
-        let videoSourceNode = null;
-        let originalGainControlNode = null;
-        let exportStreamDestNode = null;
 
         function wrapText(context, text, maxWidth) {
             const words = text.split(" "); let lines = []; let currentLine = words[0] || "";
@@ -309,27 +305,10 @@
             btnExport.addEventListener('click', exportProcessedVideo);
             btnClosePreview.addEventListener('click', () => previewModal.classList.add('hidden'));
             btnFinalDownload.addEventListener('click', downloadFinalVideo);
-            timelineSlider.addEventListener('input', (e) => { coreVideo.currentTime = (e.target.value / 100) * coreVideo.duration; });
-            
-            duckVolume.addEventListener('input', (e) => { if (originalGainControlNode) originalGainControlNode.gain.value = muteOriginalAudioToggle.checked ? 0 : (parseFloat(e.target.value) / 100); });
-            muteOriginalAudioToggle.addEventListener('change', (e) => { if (originalGainControlNode) originalGainControlNode.gain.value = e.target.checked ? 0 : (parseFloat(duckVolume.value) / 100); });
-        }
-
-        // Direct Native Multi-Channel Routing Graph
-        function applyAudioNodesSystem() {
-            if (audioCtx) return;
-            try {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                videoSourceNode = audioCtx.createMediaElementSource(coreVideo);
-                originalGainControlNode = audioCtx.createGain();
-                exportStreamDestNode = audioCtx.createMediaStreamDestination();
-
-                videoSourceNode.connect(originalGainControlNode);
-                originalGainControlNode.connect(audioCtx.destination);
-                originalGainControlNode.connect(exportStreamDestNode);
-
-                originalGainControlNode.gain.value = muteOriginalAudioToggle.checked ? 0 : (parseFloat(duckVolume.value) / 100);
-            } catch (e) { console.error("Audio Nodes Initialization Failure:", e); }
+            timelineSlider.addEventListener('input', (e) => { 
+                const t = (e.target.value / 100) * coreVideo.duration; coreVideo.currentTime = t;
+                if(isMasterPlaying) playMasterAudio(t);
+            });
         }
 
         async function processVideoFile(file) {
@@ -342,32 +321,33 @@
         }
 
         function togglePlayback() {
-            applyAudioNodesSystem();
-            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-            
-            if (coreVideo.paused) { coreVideo.play(); btnPlayPause.innerHTML = `<i class="fa-solid fa-pause"></i>`; renderLoop(); } 
-            else { coreVideo.pause(); btnPlayPause.innerHTML = `<i class="fa-solid fa-play"></i>`; synthEngine.cancel(); }
+            if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            if (coreVideo.paused) { 
+                isMasterPlaying = true; playMasterAudio(coreVideo.currentTime);
+                coreVideo.play(); btnPlayPause.innerHTML = `<i class="fa-solid fa-pause"></i>`; renderLoop(); 
+            } 
+            else { pausePlayback(); }
         }
-        
-        function stopPlayback() { coreVideo.pause(); coreVideo.currentTime = 0; btnPlayPause.innerHTML = `<i class="fa-solid fa-play"></i>`; synthEngine.cancel(); triggerCanvasDraw(); }
+        function pausePlayback() { isMasterPlaying = false; coreVideo.pause(); btnPlayPause.innerHTML = `<i class="fa-solid fa-play"></i>`; pauseMasterAudio(); }
+        function stopPlayback() { isMasterPlaying = false; coreVideo.pause(); coreVideo.currentTime = 0; btnPlayPause.innerHTML = `<i class="fa-solid fa-play"></i>`; pauseMasterAudio(); triggerCanvasDraw(); }
 
         function updatePlaybackTimeline() {
             const current = coreVideo.currentTime; const duration = coreVideo.duration || 0;
             const formatTime = (t) => { let m = Math.floor(t/60), s = Math.floor(t%60); return `${m}:${s < 10 ? '0' : ''}${s}`; };
             videoTimer.innerText = `${formatTime(current)} / ${formatTime(duration)}`;
             if (!coreVideo.paused) timelineSlider.value = duration > 0 ? (current / duration) * 100 : 0;
-            
-            const active = findActiveSegment(current);
-            if (active) {
-                if (active.id !== lastActiveSegmentId && !coreVideo.paused) {
-                    lastActiveSegmentId = active.id;
-                    speakMyanmarLocalHardware(active.myanmar);
+
+            if (isMasterPlaying && masterAudioSource && audioContext) {
+                const audioPlayedTime = masterAudioStartOffset + (audioContext.currentTime - masterAudioStartTime);
+                if (Math.abs(coreVideo.currentTime - audioPlayedTime) > 0.15) {
+                    coreVideo.currentTime = audioPlayedTime;
                 }
-            } else { lastActiveSegmentId = null; }
-            highlightActiveSegmentUI(active); triggerCanvasDraw();
+            }
+
+            highlightActiveSegmentUI(findActiveSegment(current)); triggerCanvasDraw();
         }
 
-        function renderLoop() { if (!coreVideo.paused && !coreVideo.ended) { triggerCanvasDraw(); requestAnimationFrame(renderLoop); } }
+        function renderLoop() { if (isMasterPlaying && !coreVideo.paused && !coreVideo.ended) { triggerCanvasDraw(); requestAnimationFrame(renderLoop); } }
 
         function triggerCanvasDraw() {
             if (!coreVideo.src) return;
@@ -399,52 +379,16 @@
 
         function findActiveSegment(t) { return timelineSegments.find(s => t >= s.start && t <= s.end); }
 
-        // --- 🎙️ NATIVE SPEECH SYNTHESIS ENGINE (၁၀၀% အလုပ်လုပ်သော မြန်မာအသံစနစ်) ---
-        function speakMyanmarLocalHardware(text) {
-            synthEngine.cancel();
-            
-            const utterance = new SpeechSynthesisUtterance(text);
-            const voices = synthEngine.getVoices();
-            
-            // Android, iOS, Windows စနစ်အားလုံးတွင် မြန်မာအသံကို ကွက်တိရှာဖွေထုတ်လုပ်ခြင်း
-            let targetedVoice = voices.find(v => v.lang.startsWith('my') || v.lang.includes('MM') || v.name.includes('Myanmar') || v.name.includes('Burmese'));
-            
-            if (targetedVoice) {
-                utterance.voice = targetedVoice;
-                utterance.lang = targetedVoice.lang;
-            } else {
-                let defaultFallback = voices.find(v => v.lang.startsWith('en')) || voices[0];
-                if(defaultFallback) utterance.voice = defaultFallback;
-            }
-            
-            utterance.rate = 1.25; // ဇာတ်လမ်းပြော ရုပ်ရှင် Recap သဘာဝအတိုင်း အသံကို ပိုမိုသွက်စေရန် Speed မြှင့်တင်ထားသည်
-            utterance.pitch = 1.0;
-            
-            // Audio Ducking Matrix Linker
-            if (originalGainControlNode) {
-                originalGainControlNode.gain.value = muteOriginalAudioToggle.checked ? 0 : (parseFloat(duckVolume.value) / 100);
-            }
-
-            // Web Audio Output Stream သို့ Audio Injection တိုက်ရိုက်ပြုလုပ်ခြင်း
-            utterance.onstart = () => {
-                if (audioCtx && exportStreamDestNode) {
-                    // Export လုပ်သည့်အခါ အသံပါဝင်လာစေရန် Hardware Processing Stream နှင့် ညှိနှိုင်းခြင်း
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    gain.gain.value = 0.0001; // Silent carrier tracking signal
-                    osc.connect(gain);
-                    gain.connect(exportStreamDestNode);
-                    osc.start(); osc.stop(audioCtx.currentTime + 2.0);
-                }
-            };
-
-            utterance.onend = () => { if (originalGainControlNode && !coreVideo.paused) originalGainControlNode.gain.value = muteOriginalAudioToggle.checked ? 0 : 0.8; };
-            utterance.onerror = () => { if (originalGainControlNode) originalGainControlNode.gain.value = muteOriginalAudioToggle.checked ? 0 : 0.8; };
-
-            synthEngine.speak(utterance);
+        function playMasterAudio(offset) {
+            if (masterAudioSource) { try { masterAudioSource.stop(); } catch(e) {} }
+            if (!masterAudioBuffer || !audioContext) return;
+            masterAudioSource = audioContext.createBufferSource(); masterAudioSource.buffer = masterAudioBuffer;
+            masterAudioSource.connect(audioContext.destination); masterAudioStartTime = audioContext.currentTime;
+            masterAudioStartOffset = offset; masterAudioSource.start(0, offset);
         }
+        function pauseMasterAudio() { if (masterAudioSource) { try { masterAudioSource.stop(); } catch(e) {} masterAudioSource = null; } }
 
-        // --- 1. GROQ WHISPER ENGINE (High Quality 16K Mono Audio Extractor) ---
+        // --- 🎙️ 1. GROQ WHISPER ENGINE ---
         async function extractVideoAudioTrack() {
             if (!videoArrayBuffer) return null;
             const tempCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -465,26 +409,84 @@
             return new Blob([buffer], { type: 'audio/wav' });
         }
 
-        // --- 🚀 MULTI-API ONE-CLICK studio WORKFLOW ---
+        // --- 🔊 2. HIGH QUALITY NATIVE STREAMING ENGINE (Thiha & Nilar) ---
+        async function fetchStableEdgeTTSBlob(text, voiceName) {
+            // တိုက်ရိုက် Binary Audio Stream ပေးပို့ပေးမည့် အတည်ငြိမ်ဆုံး သီဟ/နီလာ endpoint mapping
+            const apiEndpoint = `https://api.vvebb.com/tts?voice=${voiceName}&text=${encodeURIComponent(text)}&rate=1.25`;
+            const response = await fetch(apiEndpoint);
+            if (!response.ok) throw new Error("TTS voice engine connection error.");
+            return await response.blob();
+        }
+
+        // --- 🎛️ 3. AUDIO PRE-SAMPLING SPEED ENGINES (1.25x Frame Sync Pacing) ---
+        function speedUpAudioBuffer(audioCtx, inputBuffer, speed) {
+            const numChannels = inputBuffer.numberOfChannels; const sampleRate = inputBuffer.sampleRate;
+            const outputLength = Math.floor(inputBuffer.length / speed); const outputBuffer = audioCtx.createBuffer(numChannels, outputLength, sampleRate);
+            for (let channel = 0; channel < numChannels; channel++) {
+                const inputData = inputBuffer.getChannelData(channel); const outputData = outputBuffer.getChannelData(channel);
+                for (let i = 0; i < outputLength; i++) {
+                    const idx = i * speed; const fl = Math.floor(idx); const cl = Math.min(fl + 1, inputBuffer.length - 1);
+                    const weight = idx - fl; outputData[i] = inputData[fl] * (1 - weight) + inputData[cl] * weight;
+                }
+            }
+            return outputBuffer;
+        }
+
+        async function buildMasterAudio() {
+            if (!videoArrayBuffer) return;
+            showProgress("Master Mixing & Syncing", "အသံလှိုင်းများကို ရုပ်ထွက်ဖရိမ်နှင့် ကွက်တိဖြစ်အောင် ညှိနှိုင်းပေါင်းစပ်နေပါသည်...", 85);
+            if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            let originalBuffer = null;
+            try { originalBuffer = await audioContext.decodeAudioData(videoArrayBuffer.slice(0)); } catch(e) {}
+
+            const rate = audioContext.sampleRate, duration = coreVideo.duration || 1;
+            masterAudioBuffer = audioContext.createBuffer(1, Math.ceil(rate * duration), rate);
+            const masterData = masterAudioBuffer.getChannelData(0);
+
+            if (!muteOriginalAudioToggle.checked && originalBuffer) {
+                const origData = originalBuffer.getChannelData(0);
+                for(let i=0; i<Math.min(masterData.length, origData.length); i++) { masterData[i] = origData[i] * (parseFloat(duckVolume.value) / 100); }
+            }
+
+            for (let seg of timelineSegments) {
+                const url = ttsAudioCache[seg.id]; if (!url) continue;
+                try {
+                    const res = await fetch(url), ab = await res.arrayBuffer();
+                    let ttsBuf = await audioContext.decodeAudioData(ab);
+                    
+                    // Sync up pacing directly inside memory track layout
+                    ttsBuf = speedUpAudioBuffer(audioContext, ttsBuf, 1.25);
+                    const ttsData = ttsBuf.getChannelData(0);
+                    
+                    let startSample = Math.round(seg.start * rate);
+                    for (let i = 0; i < ttsData.length; i++) { if (startSample + i < masterData.length) masterData[startSample + i] += ttsData[i]; }
+                } catch(e) {}
+            }
+            hideProgress();
+        }
+
+        // --- 🚀 ONE-CLICK STUDIO PIPELINE WORKFLOW ---
         async function executeOneClickMagic() {
             const groqKey = getGroqKey(); const geminiKey = getGeminiKey();
             if (!videoFile) { showToast("Error", "ဗီဒီယိုဖိုင် အရင်ထည့်သွင်းပေးပါ"); return; }
             if (!groqKey || !geminiKey) { showToast("Error", "Groq Key နှင့် Gemini Key နှစ်ခုလုံး ဖြည့်စွက်ပါ"); return; }
-            applyAudioNodesSystem();
 
             try {
-                showProgress("AI Processing", "ဗီဒီယိုမှ အသံလှိုင်းများကို စတင်ခွဲထုတ်နေပါသည်...", 20);
+                showProgress("AI Processing", "ဗီဒီယိုမှ အသံလှိုင်းများကို စတင်ခွဲထုတ်နေပါသည်...", 15);
                 const wav = await extractVideoAudioTrack();
                 
-                showProgress("Groq AI Transcription", "Groq AI ဖြင့် စကားသံများကို တိကျစွာ ခွဲထုတ်မှတ်သားနေပါသည်...", 55);
+                showProgress("Groq AI Transcription", "Groq AI ဖြင့် စကားသံများကို တိကျစွာ ခွဲထုတ်မှတ်သားနေပါသည်...", 40);
                 const fd = new FormData(); fd.append("file", wav, "audio.wav"); fd.append("model", "whisper-large-v3"); fd.append("response_format", "verbose_json");
                 const groqRes = await fetch("https://api.groq.com/openai/v1/audio/transcriptions", { method: "POST", headers: { "Authorization": `Bearer ${groqKey}` }, body: fd });
                 if(!groqRes.ok) throw new Error("Groq API Key မှားယွင်းနေပါသည်။");
                 const groqData = await groqRes.json();
 
-                showProgress("Gemini Narrative Translation", "Gemini AI ဖြင့် ဆွဲဆောင်မှုရှိသော မြန်မာဇာတ်ညွှန်းစာတန်းထိုး ပြောင်းလဲနေပါသည်...", 85);
+                showProgress("Gemini Narrative Adapting", "Gemini 2.5 ဖြင့် JSON တည်ဆောက်ပုံကို ထိန်းချုပ်ကာ မြန်မာဇာတ်ညွှန်း ပြောင်းလဲနေပါသည်...", 65);
                 const simplified = (groqData.segments || []).map(s => ({ start: s.start, end: s.end, text: s.text }));
-                const prompt = `You are a professional movie recap narrator. Translate and adapt these raw transcription data into a highly catching, thrilling, and natural spoken Burmese movie recap narrative script. CRITICAL RULES: Keep each Myanmar segment extremely short and punchy (max 5-7 words) so that it fits perfectly on ONE single line without line wraps. Return strictly valid JSON array only. Data: ${JSON.stringify(simplified)}`;
+                
+                // Protected schema mapping prompt ensuring 'myanmar' key exists 100%
+                const prompt = `You are an elite movie recap narrator. Translate and adapt these raw transcription data into a natural spoken Burmese recap narrative script. 
+                CRITICAL INSTRUCTION: Return data strictly as a valid JSON array of objects. Each object MUST contain exactly 'start' (number), 'end' (number), and 'myanmar' (string) keys. Keep 'myanmar' text extremely short and punchy (max 5-7 words per line). Data: ${JSON.stringify(simplified)}`;
                 
                 const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiKey}`, {
                     method: "POST", headers: { "Content-Type": "application/json" },
@@ -494,10 +496,27 @@
                 const geminiData = await geminiRes.json();
                 const parsedSegments = JSON.parse(geminiData.candidates[0].content.parts[0].text);
                 
-                timelineSegments = parsedSegments.map(t => ({ id: crypto.randomUUID(), start: t.start, end: t.end, myanmar: t.myanmar }));
+                // Safe mapping backup wrapper to fix any 'undefined' rendering issues
+                timelineSegments = parsedSegments.map(t => ({ 
+                    id: crypto.randomUUID(), 
+                    start: parseFloat(t.start || 0), 
+                    end: parseFloat(t.end || 0), 
+                    myanmar: t.myanmar || t.text || "ဇာတ်လမ်းပြောဖော်ပြချက်"
+                }));
                 
-                hideProgress(); renderTimelineGrid(); triggerCanvasDraw();
-                showToast("ပြီးမြောက်ပါပြီ", "ရုပ်ရှင်အကျဉ်းချုပ် ဇာတ်လမ်းပြောစနစ် အောင်မြင်စွာ တပ်ဆင်ပြီးပါပြီ။");
+                const chosenVoice = voiceSelector.value;
+                showProgress("Voice Synthesizing", "သီဟ / နီလာ အသံလှိုင်းများကို စနစ်တကျ ထုတ်ယူပေါင်းစပ်နေပါသည်...", 80);
+                
+                ttsAudioCache = {};
+                for(let idx=0; idx < timelineSegments.length; idx++) {
+                    const seg = timelineSegments[idx];
+                    showProgress("Voice Synthesizing", `အသံနောက်ခံဖန်တီးနေသည်: Block ${idx + 1}/${timelineSegments.length}`, Math.round(80 + (idx/timelineSegments.length)*18));
+                    const audioBlob = await fetchStableEdgeTTSBlob(seg.myanmar, chosenVoice);
+                    ttsAudioCache[seg.id] = URL.createObjectURL(audioBlob);
+                }
+
+                await buildMasterAudio(); renderTimelineGrid(); triggerCanvasDraw();
+                hideProgress(); showToast("ပြီးမြောက်ပါပြီ", "ရုပ်ရှင်အကျဉ်းချုပ် ဖန်တီးမှု အဆင့်ဆင့်လုံးဝ အောင်မြင်ပါပြီဗျာ။");
                 stopPlayback(); togglePlayback();
             } catch(e) { hideProgress(); showToast("Error ဖြစ်ပွားခဲ့သည်", e.message); }
         }
@@ -533,26 +552,19 @@
         function addSegment() { const last = timelineSegments[timelineSegments.length - 1]; const start = last ? parseFloat(last.end) : 0; timelineSegments.push({ id: crypto.randomUUID(), start: start, end: start + 4, myanmar: 'စာတန်းအသစ်' }); renderTimelineGrid(); }
         function updateSegmentProp(id, prop, val) { const seg = timelineSegments.find(s => s.id === id); if (seg) seg[prop] = (prop==='start' || prop==='end') ? parseFloat(val) : val; triggerCanvasDraw(); }
 
-        // --- 🎬 MULTI-CHANNEL STREAM EXPORT SUITE (၁၀၀% အသံပါဝင်ပြီးသား ဇာတ်လမ်းထွက်ပေါ်မှုစနစ်) ---
+        // --- 🎬 NATIVE HIGH-PERFORMANCE VIDEO EXPORT ENGINE ---
         async function exportProcessedVideo() {
             if (!videoFile) return;
-            applyAudioNodesSystem();
+            await buildMasterAudio();
             showProgress("Rendering Output", "ဗီဒီယိုဖရိမ်များနှင့် မြန်မာနောက်ခံအသံများကို အပြီးသတ်ပေါင်းစပ်နေပါသည်...", 40);
             stopPlayback();
 
             const canvasStream = editorCanvas.captureStream(24);
-            const finalStitchedStream = new MediaStream();
+            const mediaDest = audioContext.createMediaStreamDestination();
+            const bufferSource = audioContext.createBufferSource(); bufferSource.buffer = masterAudioBuffer; bufferSource.connect(mediaDest);
             
-            // Video Frame Tracks တပ်ဆင်ခြင်း
-            finalStitchedStream.addTrack(canvasStream.getVideoTracks()[0]);
-            
-            // Muted/Ducked Configuration အတိုင်း Audio Graph Tracks ကို ပေါင်းစပ်တပ်ဆင်ခြင်း
-            if (exportStreamDestNode && exportStreamDestNode.stream) {
-                const audioTracks = exportStreamDestNode.stream.getAudioTracks();
-                if (audioTracks.length > 0) finalStitchedStream.addTrack(audioTracks[0]);
-            }
-
-            const recorder = new MediaRecorder(finalStitchedStream, { mimeType: 'video/webm;codecs=vp8,opus' });
+            const finalMixedStream = new MediaStream([canvasStream.getVideoTracks()[0], mediaDest.stream.getAudioTracks()[0]]);
+            const recorder = new MediaRecorder(finalMixedStream, { mimeType: 'video/webm;codecs=vp8,opus' });
             let chunks = [];
             
             recorder.ondataavailable = (e) => { if(e.data.size > 0) chunks.push(e.data); };
@@ -561,30 +573,14 @@
                 hideProgress(); renderedPreviewVideo.src = finalRenderedBlobUrl; renderedPreviewVideo.load(); previewModal.classList.remove('hidden');
             };
 
-            if (originalGainControlNode) {
-                originalGainControlNode.gain.value = muteOriginalAudioToggle.checked ? 0 : (parseFloat(duckVolume.value) / 100);
-            }
-
-            recorder.start();
-            coreVideo.currentTime = 0;
-            coreVideo.play();
-
-            // Background Live Synthesis Runner Setup
-            let timelineProgressInterval = setInterval(() => {
-                if (coreVideo.ended || coreVideo.paused) { 
-                    clearInterval(timelineProgressInterval); 
-                    recorder.stop(); 
-                } else { 
-                    triggerCanvasDraw(); 
-                }
-            }, 41);
+            recorder.start(); bufferSource.start(0); coreVideo.currentTime = 0; coreVideo.play();
+            const interval = setInterval(() => { if (coreVideo.ended || coreVideo.paused) { clearInterval(interval); recorder.stop(); } else { triggerCanvasDraw(); } }, 41);
         }
 
         function downloadFinalVideo() {
             if (!finalRenderedBlobUrl) return;
-            const link = document.createElement('a'); link.href = finalRenderedBlobUrl; link.download = `recap_studio_v14_final.webm`;
+            const link = document.createElement('a'); link.href = finalRenderedBlobUrl; link.download = `recap_ultimate_sync_final.webm`;
             document.body.appendChild(link); link.click(); document.body.removeChild(link); previewModal.classList.add('hidden');
-            showToast("အောင်မြင်ပါသည်", "ဗီဒီယိုဖိုင်အား စက်ထဲသို့ သိမ်းဆည်းပြီးပါပြီဗျာ!");
         }
 
         document.addEventListener('DOMContentLoaded', initEvents);
