@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Movie Recap - Myanmar One-Click Studio v11.0</title>
-    <!-- Tailwind CSS -->
+    <title>AI Movie Recap - Gemini TTS One-Click Studio v12.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght=400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', 'Padauk', sans-serif; background-color: #070a13; }
         .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -19,44 +16,37 @@
         .magic-glow { box-shadow: 0 0 20px rgba(245, 158, 11, 0.25); }
     </style>
 </head>
-<body class="text-gray-100 min-h-screen flex flex-col font-sans">
+<body class="text-gray-100 min-h-screen flex flex-col font-sans overflow-x-hidden">
 
-    <!-- Top Navigation Bar -->
-    <header class="border-b border-gray-800 bg-gray-900/80 backdrop-blur px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+    <header class="border-b border-gray-800 bg-gray-900/80 backdrop-blur px-6 py-4 flex flex-col md:flex-row items-center justify-between sticky top-0 z-50 gap-4">
         <div class="flex items-center space-x-3">
             <div class="bg-gradient-to-tr from-amber-500 to-amber-600 p-2.5 rounded-xl shadow-lg shadow-amber-500/20">
                 <i class="fa-solid fa-wand-magic-sparkles text-black text-xl"></i>
             </div>
             <div>
                 <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
-                    AI Movie Recap <span class="bg-amber-500/10 text-amber-400 text-xs px-2 py-0.5 rounded border border-amber-500/20 font-medium">v11.0 Pro</span>
+                    AI Movie Recap <span class="bg-amber-500/10 text-amber-400 text-xs px-2 py-0.5 rounded border border-amber-500/20 font-medium">v12.0 Gemini Pro</span>
                 </h1>
-                <p class="text-xs text-gray-400">Thiha & Nilar Native Client Audio Engine (100% Guaranteed Output)</p>
+                <p class="text-xs text-gray-400">Gemini Native Text-to-Speech & Auto Dubbing Sync Engine</p>
             </div>
         </div>
-        <div class="flex items-center space-x-4">
+        
+        <div class="flex flex-wrap items-center gap-3 w-full md:w-auto justify-end">
+            <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 text-xs">
+                    <i class="fa-solid fa-key"></i>
+                </span>
+                <input type="password" id="ui-api-key" placeholder="Gemini API Key ထည့်ရန်" class="bg-gray-950 text-white pl-9 pr-3 py-1.5 rounded-lg border border-gray-800 text-xs focus:outline-none focus:border-amber-500 w-52" />
+            </div>
             <div class="flex items-center space-x-2 bg-gray-800 px-3 py-1.5 rounded-lg border border-gray-700 text-xs">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="text-gray-300">Direct Audio Stream Synced</span>
+                <span class="text-gray-300 text-[11px]">Gemini Audio Active</span>
             </div>
         </div>
     </header>
 
-    <!-- API Keys Input Panel -->
-    <section class="m-6 mb-0 p-4 bg-gray-900/60 border border-gray-800 rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-            <label class="text-xs font-bold text-amber-400 block mb-1.5 uppercase tracking-wider">Groq API Key</label>
-            <input type="password" id="input-groq-key" placeholder="gsk_..." class="w-full bg-gray-950 border border-gray-800 p-2.5 rounded-xl text-xs text-white outline-none focus:border-amber-500 font-mono">
-        </div>
-        <div>
-            <label class="text-xs font-bold text-amber-400 block mb-1.5 uppercase tracking-wider">Gemini API Key</label>
-            <input type="password" id="input-gemini-key" placeholder="AIzaSy..." class="w-full bg-gray-950 border border-gray-800 p-2.5 rounded-xl text-xs text-white outline-none focus:border-amber-500 font-mono">
-        </div>
-    </section>
-
-    <!-- Main Workspace -->
-    <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 overflow-hidden">
-        <!-- Left Column -->
+    <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 p-4 md:p-6 overflow-y-auto lg:overflow-hidden lg:h-[calc(100vh-80px)]">
+        
         <div class="lg:col-span-7 flex flex-col space-y-6">
             <div class="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col">
                 <div class="bg-gray-950/80 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
@@ -67,23 +57,22 @@
                 </div>
                 
                 <div class="relative bg-black flex items-center justify-center p-4 min-h-[350px]">
-                    <div id="canvas-wrapper" class="relative max-w-full max-h-[500px] flex items-center justify-center">
+                    <div id="canvas-wrapper" class="canvas-container relative max-w-full max-h-[500px] flex items-center justify-center">
                         <canvas id="editor-canvas" class="rounded-lg shadow-2xl bg-gray-950 object-contain"></canvas>
                     </div>
                     <video id="core-video" class="hidden" crossorigin="anonymous"></video>
                     
-                    <div id="upload-placeholder" class="absolute inset-0 flex flex-col items-center justify-center bg-gray-950/90 border-2 border-dashed border-gray-700 m-4 rounded-xl cursor-pointer hover:border-amber-500 transition-all z-10">
+                    <div id="upload-placeholder" class="absolute inset-0 flex flex-col items-center justify-center bg-gray-950/90 border-2 border-dashed border-gray-700 m-4 rounded-xl cursor-pointer hover:border-amber-500 transition-all duration-300 z-10">
                         <div class="bg-gray-900 p-5 rounded-full mb-3 text-gray-400"><i class="fa-solid fa-video-camera text-4xl"></i></div>
-                        <p class="font-medium text-sm text-gray-200">ဤနေရာတွင် ဗီဒီယိုကို ထည့်သွင်းပါ</p>
+                        <p class="font-medium text-sm text-gray-200">ဤနေရာတွင် သင်၏ Movie Recap ဗီဒီယိုကို ထည့်ပါ</p>
                         <input type="file" id="video-uploader" accept="video/*" class="hidden">
                     </div>
                 </div>
 
-                <!-- Media Control Toolbar -->
                 <div class="bg-gray-950/80 p-4 border-t border-gray-800 flex flex-wrap items-center justify-between gap-4">
                     <div class="flex items-center space-x-2">
-                        <button id="btn-play-pause" class="w-10 h-10 rounded-lg bg-amber-500 text-black flex items-center justify-center disabled:opacity-50" disabled><i class="fa-solid fa-play"></i></button>
-                        <button id="btn-stop" class="w-10 h-10 rounded-lg bg-gray-800 text-gray-300 flex items-center justify-center disabled:opacity-50" disabled><i class="fa-solid fa-stop"></i></button>
+                        <button id="btn-play-pause" class="w-10 h-10 rounded-lg bg-amber-500 hover:bg-amber-600 text-black flex items-center justify-center transition-all disabled:opacity-50" disabled><i class="fa-solid fa-play"></i></button>
+                        <button id="btn-stop" class="w-10 h-10 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-300 flex items-center justify-center transition-all disabled:opacity-50" disabled><i class="fa-solid fa-stop"></i></button>
                     </div>
                     <div class="flex-1 flex items-center space-x-3">
                         <span class="text-xs font-mono text-gray-500" id="current-time-lbl">0:00</span>
@@ -91,13 +80,12 @@
                         <span class="text-xs font-mono text-gray-500" id="total-duration-lbl">0:00</span>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <button id="btn-mute" class="text-gray-400"><i class="fa-solid fa-volume-high"></i></button>
-                        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.8" class="w-16 h-1 bg-gray-800 accent-amber-500">
+                        <button id="btn-mute" class="text-gray-400 hover:text-white transition-colors"><i class="fa-solid fa-volume-high"></i></button>
+                        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.8" class="w-16 h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-amber-500">
                     </div>
                 </div>
             </div>
 
-            <!-- Customization Panel -->
             <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 shadow-xl space-y-4">
                 <div class="flex items-center justify-between">
                     <label class="text-xs font-semibold text-gray-300 flex items-center gap-1.5"><i class="fa-solid fa-eye-slash text-red-400"></i> Original Subtitle Mask (စာတန်းဟောင်းဖျောက်ရန်)</label>
@@ -124,7 +112,6 @@
             </div>
         </div>
 
-        <!-- Right Column -->
         <div class="lg:col-span-5 flex flex-col space-y-6 overflow-hidden">
             <div class="bg-gray-900 border border-gray-800 rounded-2xl p-4 shadow-xl grid grid-cols-2 gap-4">
                 <div>
@@ -143,28 +130,30 @@
                 </div>
             </div>
 
-            <!-- Automation Control Suite -->
             <div class="bg-gradient-to-br from-amber-650/15 to-orange-650/15 border border-amber-500/35 rounded-2xl p-5 shadow-xl magic-glow space-y-4">
                 <div class="flex items-center space-x-3">
                     <span class="p-2.5 rounded-xl bg-amber-500 text-black"><i class="fa-solid fa-bolt text-lg"></i></span>
                     <div>
-                        <h4 class="text-sm font-bold text-white">One-Click AI Multi-Channel Studio</h4>
-                        <p class="text-[11px] text-gray-400">Groq Whisper + Gemini 2.5 + Direct Client Stream (100% Fixed)</p>
+                        <h4 class="text-sm font-bold text-white">One-Click Gemini API Dubbing</h4>
+                        <p class="text-[11px] text-gray-400">Gemini Flash TTS စနစ်ကို သုံး၍ သဘာဝကျEngaging အသံများ ထုတ်ယူပါမည်။</p>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-3 bg-gray-950 p-3 rounded-xl border border-gray-800">
                     <div>
-                        <label class="text-[10px] text-gray-400 block mb-1">AI Voice အသံရွေးရန်</label>
+                        <label class="text-[10px] text-gray-400 block mb-1">Gemini Voice Presets</label>
                         <select id="voice-selector" class="w-full bg-gray-900 border border-gray-800 p-2 rounded text-xs text-amber-400 font-semibold">
-                            <option value="my-MM-ThihaNeural" selected>Thiha (သီဟ - အမျိုးသားသံ)</option>
-                            <option value="my-MM-NilarNeural">Nilar (နီလာ - အမျိုးသမီးသံ)</option>
+                            <option value="Puck" selected>Puck (ရုပ်ရှင်သုံး - အသံခန့်ညား)</option>
+                            <option value="Charon">Charon (အမျိုးသားသံ - တည်ငြိမ်)</option>
+                            <option value="Kore">Kore (အမျိုးသမီးသံ - ရှင်းလင်း)</option>
+                            <option value="Fenrir">Fenrir (သွက်လက်ပြတ်သား)</option>
                         </select>
                     </div>
                     <div>
                         <label class="text-[10px] text-gray-400 block mb-1">Narration Speed</label>
-                        <input type="text" value="1.25x (Fast Recap)" class="w-full bg-gray-900 border border-gray-800 p-2 rounded text-xs text-gray-400" disabled>
+                        <input type="text" value="Auto-Synced 1.2x" class="w-full bg-gray-900 border border-gray-800 p-2 rounded text-xs text-gray-400" disabled>
                     </div>
                 </div>
+
                 <div class="flex items-center space-x-3 bg-gray-950/50 p-3 rounded-lg border border-gray-800/80">
                     <div class="flex items-center h-5">
                         <input id="mute-original-audio-toggle" type="checkbox" class="w-4 h-4 text-amber-500 bg-gray-900 border-gray-800 rounded focus:ring-amber-500 accent-amber-500" checked>
@@ -173,16 +162,16 @@
                         <label for="mute-original-audio-toggle" class="font-medium text-gray-200">မူရင်းဗီဒီယိုအသံကို လုံးဝပိတ်ပစ်မည် (Mute Original Audio)</label>
                     </div>
                 </div>
+
                 <button id="btn-one-click-magic" class="w-full py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 text-black text-xs font-extrabold uppercase tracking-widest rounded-xl shadow-lg flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-microphone-lines animate-pulse"></i> Start One-Click AI Audio Transcribe
+                    <i class="fa-solid fa-microphone-lines animate-pulse"></i> Start One-Click Gemini AI Dubbing
                 </button>
             </div>
 
-            <!-- Timeline & Transcription Segments -->
             <div class="bg-gray-900 border border-gray-800 rounded-2xl flex flex-col flex-grow min-h-[200px] overflow-hidden shadow-xl">
                 <div class="bg-gray-950/80 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
                     <span class="text-xs font-semibold uppercase tracking-wider text-gray-400"><i class="fa-solid fa-list-check text-amber-500"></i> Narrative Timeline Editor</span>
-                    <button id="btn-add-segment" class="text-xs text-amber-400 hover:text-amber-300 font-bold">+ Add Segment</button>
+                    <button id="btn-add-segment" class="text-xs text-amber-400 hover:text-amber-300 font-bold">+ Add Custom Segment</button>
                 </div>
                 <div id="segment-container" class="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar bg-gray-950/40">
                     <div id="empty-state-notice" class="text-center py-10 text-xs text-gray-500">ဗီဒီယိုဖိုင် တင်သွင်းပြီး Start ခလုတ်ကို နှိပ်ပါ</div>
@@ -199,7 +188,6 @@
                 </div>
             </div>
 
-            <!-- Export Actions -->
             <div class="bg-gray-900 border border-gray-800 rounded-2xl p-4 shadow-xl">
                 <button id="btn-export" class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 text-white text-xs font-bold uppercase tracking-wider rounded-xl flex items-center justify-center gap-2">
                     <i class="fa-solid fa-download"></i> Combine & Export Final Movie Recap Video
@@ -208,7 +196,6 @@
         </div>
     </main>
 
-    <!-- UI Components -->
     <div id="notification-toast" class="fixed bottom-6 right-6 z-[100] transform translate-y-20 opacity-0 transition-all duration-300 bg-gray-900 border border-gray-800 text-gray-100 px-5 py-4 rounded-xl shadow-2xl max-w-sm flex items-start space-x-3">
         <div id="toast-icon" class="text-amber-500 mt-0.5"><i class="fa-solid fa-circle-info text-lg"></i></div>
         <div class="flex-1">
@@ -225,7 +212,7 @@
                 <i class="fa-solid fa-bolt text-xl text-amber-500"></i>
             </div>
             <div>
-                <h3 id="progress-title" class="text-sm font-bold text-white">One-Click AI Studio Processing</h3>
+                <h3 id="progress-title" class="text-sm font-bold text-white">Gemini Studio Processing</h3>
                 <p id="progress-desc" class="text-xs text-gray-400 mt-1">ဗီဒီယို တစ်ခုလုံးကို AI ဖြင့် ပြင်ဆင်နေပါသည်...</p>
             </div>
             <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
@@ -252,23 +239,17 @@
         </div>
     </div>
 
-    <!-- CORE JAVASCRIPT SYSTEM ENGINE (v11.0 THIHA & NILAR DIRECT NATIVE AUDIO INJECTOR) -->
     <script>
-        const inputGroqKey = document.getElementById('input-groq-key');
-        const inputGeminiKey = document.getElementById('input-gemini-key');
+        const uiApiKeyInput = document.getElementById('ui-api-key');
 
         document.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('saved_groq_key')) inputGroqKey.value = localStorage.getItem('saved_groq_key');
-            if (localStorage.getItem('saved_gemini_key')) inputGeminiKey.value = localStorage.getItem('saved_gemini_key');
+            if (localStorage.getItem('saved_gemini_key')) uiApiKeyInput.value = localStorage.getItem('saved_gemini_key');
         });
 
-        inputGroqKey.addEventListener('input', () => localStorage.setItem('saved_groq_key', inputGroqKey.value.trim()));
-        inputGeminiKey.addEventListener('input', () => localStorage.setItem('saved_gemini_key', inputGeminiKey.value.trim()));
+        uiApiKeyInput.addEventListener('input', () => localStorage.setItem('saved_gemini_key', uiApiKeyInput.value.trim()));
+        function getApiKey() { return uiApiKeyInput.value.trim(); }
 
-        function getGroqKey() { return inputGroqKey.value.trim(); }
-        function getGeminiKey() { return inputGeminiKey.value.trim(); }
-
-        // Core Application State
+        // Core App States
         let videoFile = null, videoArrayBuffer = null, timelineSegments = [], ttsAudioCache = {};
         let coreVideo = document.getElementById('core-video'), editorCanvas = document.getElementById('editor-canvas'), ctx = editorCanvas.getContext('2d');
         let uploadPlaceholder = document.getElementById('upload-placeholder'), videoUploader = document.getElementById('video-uploader'), canvasWrapper = document.getElementById('canvas-wrapper');
@@ -277,12 +258,8 @@
         let previewModal = document.getElementById('preview-modal'), renderedPreviewVideo = document.getElementById('rendered-preview-video'), btnClosePreview = document.getElementById('btn-close-preview'), btnFinalDownload = document.getElementById('btn-final-download'), toast = document.getElementById('notification-toast'), toastTitle = document.getElementById('toast-title'), toastBody = document.getElementById('toast-body'), progressModal = document.getElementById('progress-modal'), progressTitle = document.getElementById('progress-title'), progressDesc = document.getElementById('progress-desc'), progressBarFill = document.getElementById('progress-bar-fill'), progressPercent = document.getElementById('progress-percent');
         let videoTimer = document.getElementById('video-timer'), currentTimeLbl = document.getElementById('current-time-lbl'), totalDurationLbl = document.getElementById('total-duration-lbl'), btnPlayPause = document.getElementById('btn-play-pause'), btnStop = document.getElementById('btn-stop'), timelineSlider = document.getElementById('timeline-slider'), volumeSlider = document.getElementById('volume-slider'), btnMute = document.getElementById('btn-mute');
 
-        // Audio Management Graph Map
-        let audioCtx = null;
-        let videoAudioSource = null;
-        let mainGainNode = null;
-        let streamDestNode = null;
-        let lastActiveSegmentId = null;
+        // Audio Topology Graph
+        let audioContext = null, masterAudioBuffer = null, masterAudioSource = null, masterAudioStartTime = 0, masterAudioStartOffset = 0, isMasterPlaying = false, finalRenderedBlobUrl = null;
 
         function wrapText(context, text, maxWidth) {
             const words = text.split(" "); let lines = []; let currentLine = words[0] || "";
@@ -307,6 +284,7 @@
         }
 
         function initEvents() {
+            uploadPlaceholder.click();
             uploadPlaceholder.addEventListener('click', () => videoUploader.click());
             videoUploader.addEventListener('change', (e) => { if (e.target.files.length > 0) processVideoFile(e.target.files[0]); });
             btnPlayPause.addEventListener('click', togglePlayback);
@@ -326,26 +304,10 @@
             btnExport.addEventListener('click', exportProcessedVideo);
             btnClosePreview.addEventListener('click', () => previewModal.classList.add('hidden'));
             btnFinalDownload.addEventListener('click', downloadFinalVideo);
-            timelineSlider.addEventListener('input', (e) => { coreVideo.currentTime = (e.target.value / 100) * coreVideo.duration; });
-            
-            duckVolume.addEventListener('input', (e) => { if (mainGainNode) mainGainNode.gain.value = muteOriginalAudioToggle.checked ? 0 : (parseFloat(e.target.value) / 100); });
-            muteOriginalAudioToggle.addEventListener('change', (e) => { if (mainGainNode) mainGainNode.gain.value = e.target.checked ? 0 : (parseFloat(duckVolume.value) / 100); });
-        }
-
-        function initAudioGraph() {
-            if (audioCtx) return;
-            try {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                videoAudioSource = audioCtx.createMediaElementSource(coreVideo);
-                mainGainNode = audioCtx.createGain();
-                streamDestNode = audioCtx.createMediaStreamDestination();
-
-                videoAudioSource.connect(mainGainNode);
-                mainGainNode.connect(audioCtx.destination);
-                mainGainNode.connect(streamDestNode);
-
-                mainGainNode.gain.value = muteOriginalAudioToggle.checked ? 0 : (parseFloat(duckVolume.value) / 100);
-            } catch (e) { console.error("Audio Context Init Error:", e); }
+            timelineSlider.addEventListener('input', (e) => { 
+                const t = (e.target.value / 100) * coreVideo.duration; coreVideo.currentTime = t;
+                if(isMasterPlaying) playMasterAudio(t);
+            });
         }
 
         async function processVideoFile(file) {
@@ -358,30 +320,25 @@
         }
 
         function togglePlayback() {
-            initAudioGraph();
-            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-            if (coreVideo.paused) { coreVideo.play(); btnPlayPause.innerHTML = `<i class="fa-solid fa-pause"></i>`; renderLoop(); } 
-            else { coreVideo.pause(); btnPlayPause.innerHTML = `<i class="fa-solid fa-play"></i>`; }
+            if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            if (coreVideo.paused) { 
+                isMasterPlaying = true; playMasterAudio(coreVideo.currentTime);
+                coreVideo.play(); btnPlayPause.innerHTML = `<i class="fa-solid fa-pause"></i>`; renderLoop(); 
+            } 
+            else { pausePlayback(); }
         }
-        function stopPlayback() { coreVideo.pause(); coreVideo.currentTime = 0; btnPlayPause.innerHTML = `<i class="fa-solid fa-play"></i>`; triggerCanvasDraw(); }
+        function pausePlayback() { isMasterPlaying = false; coreVideo.pause(); btnPlayPause.innerHTML = `<i class="fa-solid fa-play"></i>`; pauseMasterAudio(); }
+        function stopPlayback() { isMasterPlaying = false; coreVideo.pause(); coreVideo.currentTime = 0; btnPlayPause.innerHTML = `<i class="fa-solid fa-play"></i>`; pauseMasterAudio(); triggerCanvasDraw(); }
 
         function updatePlaybackTimeline() {
             const current = coreVideo.currentTime, duration = coreVideo.duration || 0;
             const formatTime = (t) => { let m = Math.floor(t/60), s = Math.floor(t%60); return `${m}:${s < 10 ? '0' : ''}${s}`; };
             videoTimer.innerText = `${formatTime(current)} / ${formatTime(duration)}`;
             if (!coreVideo.paused) timelineSlider.value = duration > 0 ? (current / duration) * 100 : 0;
-            
-            const active = findActiveSegment(current);
-            if (active) {
-                if (active.id !== lastActiveSegmentId && !coreVideo.paused) {
-                    lastActiveSegmentId = active.id;
-                    playChainedSegmentAudio(active.id);
-                }
-            } else { lastActiveSegmentId = null; }
-            highlightActiveSegmentUI(active); triggerCanvasDraw();
+            highlightActiveSegmentUI(findActiveSegment(current)); triggerCanvasDraw();
         }
 
-        function renderLoop() { if (!coreVideo.paused && !coreVideo.ended) { triggerCanvasDraw(); requestAnimationFrame(renderLoop); } }
+        function renderLoop() { if (isMasterPlaying && !coreVideo.paused && !coreVideo.ended) { triggerCanvasDraw(); requestAnimationFrame(renderLoop); } }
 
         function triggerCanvasDraw() {
             if (!coreVideo.src) return;
@@ -411,36 +368,48 @@
 
         function findActiveSegment(t) { return timelineSegments.find(s => t >= s.start && t <= s.end); }
 
-        // --- 🎙️ NATIVE CLIENT-SIDE HIGH QUALITY NARRATION ENGINE (Thiha & Nilar) ---
-        async function fetchNativeEdgeTTSBlob(text, voiceName) {
-            // Public Dynamic REST API Client endpoint mapping (100% stable raw stream extraction)
-            const backupUrl = `https://api.vvebb.com/tts?voice=${voiceName}&text=${encodeURIComponent(text)}&rate=1.25`;
-            const response = await fetch(backupUrl);
-            if (!response.ok) throw new Error("Voice Server Response Connection Failed.");
-            return await response.blob();
+        function playMasterAudio(offset) {
+            if (masterAudioSource) { try { masterAudioSource.stop(); } catch(e) {} }
+            if (!masterAudioBuffer || !audioContext) return;
+            masterAudioSource = audioContext.createBufferSource(); masterAudioSource.buffer = masterAudioBuffer;
+            masterAudioSource.connect(audioContext.destination); masterAudioStartTime = audioContext.currentTime;
+            masterAudioStartOffset = offset; masterAudioSource.start(0, offset);
         }
+        function pauseMasterAudio() { if (masterAudioSource) { try { masterAudioSource.stop(); } catch(e) {} masterAudioSource = null; } }
 
-        function playChainedSegmentAudio(segmentId) {
-            const cachedAudioBuffer = ttsAudioCache[segmentId];
-            if (!cachedAudioBuffer || !audioCtx) return;
-
-            // Trigger dynamic sound wave amplification matrix
-            const audioSource = audioCtx.createBufferSource();
-            audioSource.buffer = cachedAudioBuffer;
-
-            // Multi-Channel connection topology maps
-            audioSource.connect(audioCtx.destination);
-            if (streamDestNode) audioSource.connect(streamDestNode);
-
-            // Volume Ducking
-            if (mainGainNode) mainGainNode.gain.value = muteOriginalAudioToggle.checked ? 0 : (parseFloat(duckVolume.value) / 100);
-            audioSource.onended = () => {
-                if (mainGainNode && !coreVideo.paused) {
-                    mainGainNode.gain.value = muteOriginalAudioToggle.checked ? 0 : 0.8;
+        // --- 🎙️ NATIVE GEMINI TEXT-TO-SPEECH (TTS) ENGINE ---
+        async function callGeminiSpeechAPI(text, voiceName, key) {
+            // Using the official premium gemini tts generation preview endpoint
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${key}`;
+            const payload = {
+                contents: [{ parts: [{ text: `Say this recap naturally: ${text}` }] }],
+                generationConfig: { 
+                    responseModalities: ["AUDIO"], 
+                    speechConfig: { 
+                        voiceConfig: { 
+                            prebuiltVoiceConfig: { voiceName: voiceName } 
+                        } 
+                    } 
                 }
             };
 
-            audioSource.start(0);
+            const response = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) throw new Error("Gemini TTS Engine Error");
+            const result = await response.json();
+            const base64Data = result.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+            if (!base64Data) throw new Error("No audio binary returned.");
+
+            const binaryString = atob(base64Data);
+            const bytes = new Uint8Array(binaryString.length);
+            for (let i = 0; i < binaryString.length; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
         }
 
         async function extractVideoAudioTrack() {
@@ -455,7 +424,7 @@
             const writeStr = (o, s) => { for(let i=0;i<s.length;i++) view.setUint8(o+i, s.charCodeAt(i)); };
             writeStr(0, 'RIFF'); view.setUint32(4, 36 + samples.length * 2, true); writeStr(8, 'WAVE'); writeStr(12, 'fmt ');
             view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, 1, true); view.setUint32(24, 16000, true);
-            view.setUint32(28, 32000, true); view.setUint16(32, 2, true); view.setUint16(34, 16, true); writeStr(36, 'data'); view.setUint32(40, samples.length * 2, true);
+            view.setUint32(32000, 32000, true); view.setUint16(32, 2, true); view.setUint16(34, 16, true); writeStr(36, 'data'); view.setUint32(40, samples.length * 2, true);
             let offset = 44;
             for (let i = 0; i < samples.length; i++, offset += 2) {
                 let s = Math.max(-1, Math.min(1, samples[i])); view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
@@ -463,47 +432,103 @@
             return new Blob([buffer], { type: 'audio/wav' });
         }
 
+        function speedUpAudioBuffer(audioCtx, inputBuffer, speed) {
+            const numChannels = inputBuffer.numberOfChannels;
+            const sampleRate = inputBuffer.sampleRate;
+            const outputLength = Math.floor(inputBuffer.length / speed);
+            const outputBuffer = audioCtx.createBuffer(numChannels, outputLength, sampleRate);
+            for (let channel = 0; channel < numChannels; channel++) {
+                const inputData = inputBuffer.getChannelData(channel);
+                const outputData = outputBuffer.getChannelData(channel);
+                for (let i = 0; i < outputLength; i++) {
+                    const idx = i * speed; const fl = Math.floor(idx); const cl = Math.min(fl + 1, inputBuffer.length - 1);
+                    const weight = idx - fl; outputData[i] = inputData[fl] * (1 - weight) + inputData[cl] * weight;
+                }
+            }
+            return outputBuffer;
+        }
+
+        async function buildMasterAudio() {
+            if (!videoArrayBuffer) return;
+            showProgress("Master Mixing", "Gemini အသံလှိုင်းများကို ပေါင်းစပ်နေပါသည်...", 85);
+            if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            let originalBuffer = null;
+            try { originalBuffer = await audioContext.decodeAudioData(videoArrayBuffer.slice(0)); } catch(e) {}
+
+            const rate = audioContext.sampleRate, duration = coreVideo.duration || 1;
+            masterAudioBuffer = audioContext.createBuffer(1, Math.ceil(rate * duration), rate);
+            const masterData = masterAudioBuffer.getChannelData(0);
+
+            if (!muteOriginalAudioToggle.checked && originalBuffer) {
+                const origData = originalBuffer.getChannelData(0);
+                for(let i=0; i<Math.min(masterData.length, origData.length); i++) { masterData[i] = origData[i] * (parseFloat(duckVolume.value) / 100); }
+            }
+
+            for (let seg of timelineSegments) {
+                const url = ttsAudioCache[seg.id]; if (!url) continue;
+                try {
+                    const res = await fetch(url), ab = await res.arrayBuffer();
+                    let ttsBuf = await audioContext.decodeAudioData(ab);
+                    
+                    // Automatically speed up Gemini TTS slightly to fit Recap pacing (1.2x)
+                    ttsBuf = speedUpAudioBuffer(audioContext, ttsBuf, 1.2);
+                    const ttsData = ttsBuf.getChannelData(0);
+                    
+                    let startSample = Math.round(seg.start * rate);
+                    for (let i = 0; i < ttsData.length; i++) { if (startSample + i < masterData.length) masterData[startSample + i] += ttsData[i]; }
+                } catch(e) {}
+            }
+            hideProgress();
+        }
+
         async function executeOneClickMagic() {
+            const key = getApiKey();
             if (!videoFile) { showToast("Error", "ဗီဒီယိုဖိုင် အရင်ထည့်ပါ"); return; }
-            if (!getGroqKey() || !getGeminiKey()) { showToast("Error", "API Keys များ ဖြည့်စွက်ပါ"); return; }
-            initAudioGraph();
+            if (!key) { showToast("Error", "Gemini API Key အရင်ဖြည့်စွက်ပါ"); return; }
 
             try {
-                showProgress("AI Processing", "ဗီဒီယိုမှ အသံလှိုင်းများကို ဆွဲထုတ်နေပါသည်...", 20);
+                showProgress("AI Processing", "ဗီဒီယိုမှ အသံလှိုင်းများကို ခွဲထုတ်နေပါသည်...", 20);
                 const wav = await extractVideoAudioTrack();
-                
-                showProgress("Groq AI Transcribing", "Groq AI စနစ်ဖြင့် စကားလုံးများကို မှတ်သားနေပါသည်...", 50);
-                const fd = new FormData(); fd.append("file", wav, "audio.wav"); fd.append("model", "whisper-large-v3"); fd.append("response_format", "verbose_json");
-                const groqRes = await fetch("https://api.groq.com/openai/v1/audio/transcriptions", { method: "POST", headers: { "Authorization": `Bearer ${getGroqKey()}` }, body: fd });
-                if(!groqRes.ok) throw new Error("Groq API Key ချိတ်ဆက်မှု လွဲချော်နေပါသည်။");
-                const groqData = await groqRes.json();
+                const reader = new FileReader();
+                const base64Promise = new Promise((res) => { reader.onloadend = () => res(reader.result.split(',')[1]); });
+                reader.readAsDataURL(wav);
+                const base64Audio = await base64Promise;
 
-                showProgress("Gemini Translation", "ရုပ်ရှင်အကျဉ်းချုပ် မြန်မာဇာတ်ညွှန်း ပြောင်းလဲနေပါသည်...", 75);
-                const simplified = (groqData.segments || []).map(s => ({ start: s.start, end: s.end, text: s.text }));
-                const prompt = `You are a professional movie recap narrator. Adapt these raw transcription data into an incredibly catching, short, and thrilling Burmese spoken movie recap script. Keep segments short (max 5-7 words per line). Return JSON array with 'start', 'end', and 'myanmar' keys only. Data: ${JSON.stringify(simplified)}`;
+                showProgress("Gemini Translating & Adapting", "Gemini Audio AI မှ စကားပြောများကို နားထောင်၍ ဇာတ်ညွှန်းခွဲထုတ်နေပါသည်...", 55);
+                const prompt = "This is the actual audio track from the uploaded video. Listen carefully and translate/adapt it into a highly engaging, emotional movie recap narrative script in spoken Myanmar language. CRITICAL: Keep each segment short and punchy (max 5-8 words per block) to fit on ONE single line. Return ONLY valid JSON array.";
                 
-                const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${getGeminiKey()}`, {
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`;
+                const geminiRes = await fetch(url, {
                     method: "POST", headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { responseMimeType: "application/json" } })
+                    body: JSON.stringify({
+                        contents: [{ role: "user", parts: [{ text: prompt }, { inlineData: { mimeType: "audio/wav", data: base64Audio } }] }],
+                        generationConfig: {
+                            responseMimeType: "application/json",
+                            responseSchema: {
+                                type: "ARRAY",
+                                items: { type: "OBJECT", properties: { start: { type: "NUMBER" }, end: { type: "NUMBER" }, myanmar: { type: "STRING" } }, required: ["start", "end", "myanmar"] }
+                            }
+                        }
+                    })
                 });
                 const geminiData = await geminiRes.json();
+                const parsedSegments = JSON.parse(geminiData.candidates[0].content.parts[0].text);
                 
-                timelineSegments = JSON.parse(geminiData.candidates[0].content.parts[0].text).map(t => ({ id: crypto.randomUUID(), start: t.start, end: t.end, myanmar: t.myanmar }));
-                
+                timelineSegments = parsedSegments.map(t => ({ id: crypto.randomUUID(), start: t.start, end: t.end, myanmar: t.myanmar }));
                 const chosenVoice = voiceSelector.value;
-                showProgress("Voice Synthesizing", "Thiha / Nilar အသံလှိုင်းများကို ဆွဲထုတ်ပေါင်းစပ်နေပါသည်...", 90);
-                
-                // Clear state caches
+
+                showProgress("Gemini Voice Synthesis", "Gemini Premium Studio TTS စနစ်ဖြင့် အသံများထုတ်ယူနေပါသည်...", 80);
                 ttsAudioCache = {};
-                for(let seg of timelineSegments) {
-                    const audioBlob = await fetchNativeEdgeTTSBlob(seg.myanmar, chosenVoice);
-                    const arrayBuffer = await audioBlob.arrayBuffer();
-                    // Decode to native PCM data node buffers to eliminate play lags
-                    ttsAudioCache[seg.id] = await audioCtx.decodeAudioData(arrayBuffer);
+                for(let idx=0; idx < timelineSegments.length; idx++) {
+                    const seg = timelineSegments[idx];
+                    showProgress("Gemini Voice Synthesis", `အသံနောက်ခံဖန်တီးနေသည်: Block ${idx + 1}/${timelineSegments.length}`, Math.round(80 + (idx/timelineSegments.length)*18));
+                    const rawPCM = await callGeminiSpeechAPI(seg.myanmar, chosenVoice, key);
+                    const wavBlob = convertPcmToWav(rawPCM, 24000);
+                    ttsAudioCache[seg.id] = URL.createObjectURL(wavBlob);
                 }
 
-                hideProgress(); renderTimelineGrid(); triggerCanvasDraw();
-                showToast("ပြီးမြောက်ပါပြီ", "Thiha/Nilar အသံနောက်ခံ ကွက်တိတပ်ဆင်ပြီးပါပြီ။");
+                await buildMasterAudio(); renderTimelineGrid(); triggerCanvasDraw();
+                hideProgress(); showToast("ပြီးမြောက်ပါပြီ", "Gemini TTS အသံနောက်ခံ ကွက်တိတပ်ဆင်ပြီးပါပြီ။");
                 stopPlayback(); togglePlayback();
             } catch(e) { hideProgress(); showToast("Error ဖြစ်ပွားခဲ့သည်", e.message); }
         }
@@ -536,54 +561,38 @@
             });
         }
 
-        function addSegment() {
-            const last = timelineSegments[timelineSegments.length - 1]; const start = last ? parseFloat(last.end) : 0;
-            timelineSegments.push({ id: crypto.randomUUID(), start: start, end: start + 4, myanmar: 'စာတန်းအသစ်' }); renderTimelineGrid();
-        }
+        // Action Handlers
+        function addSegment() { const last = timelineSegments[timelineSegments.length - 1]; const start = last ? parseFloat(last.end) : 0; timelineSegments.push({ id: crypto.randomUUID(), start: start, end: start + 4, myanmar: 'စာတန်းအသစ်' }); renderTimelineGrid(); }
         function updateSegmentProp(id, prop, val) { const seg = timelineSegments.find(s => s.id === id); if (seg) seg[prop] = (prop==='start' || prop==='end') ? parseFloat(val) : val; triggerCanvasDraw(); }
 
-        // --- 🎬 MULTI-CHANNEL SYNC VIDEO EXPORT SUITE ---
+        // --- MULTI-CHANNEL SYNC VIDEO EXPORT SUITE ---
         async function exportProcessedVideo() {
             if (!videoFile) return;
-            initAudioGraph();
+            await buildMasterAudio();
             showProgress("Rendering Output", "အသံလှိုင်းများနှင့် ရုပ်ထွက်ဖရိမ်များကို စုစည်းပေါင်းစပ်ထုတ်လုပ်နေပါသည်...", 40);
             stopPlayback();
 
             const canvasStream = editorCanvas.captureStream(24);
-            const finalStitchedStream = new MediaStream();
-            finalStitchedStream.addTrack(canvasStream.getVideoTracks()[0]);
+            const mediaDest = audioContext.createMediaStreamDestination();
+            const bufferSource = audioContext.createBufferSource(); bufferSource.buffer = masterAudioBuffer; bufferSource.connect(mediaDest);
             
-            if (streamDestNode && streamDestNode.stream) {
-                const audioTracks = streamDestNode.stream.getAudioTracks();
-                if (audioTracks.length > 0) finalStitchedStream.addTrack(audioTracks[0]);
-            }
-
-            const recorder = new MediaRecorder(finalStitchedStream, { mimeType: 'video/webm;codecs=vp8,opus' });
+            const finalMixedStream = new MediaStream([canvasStream.getVideoTracks()[0], mediaDest.stream.getAudioTracks()[0]]);
+            const recorder = new MediaRecorder(finalMixedStream, { mimeType: 'video/webm;codecs=vp8,opus' });
             let chunks = [];
             
             recorder.ondataavailable = (e) => { if(e.data.size > 0) chunks.push(e.data); };
             recorder.onstop = () => {
                 finalRenderedBlobUrl = URL.createObjectURL(new Blob(chunks, { type: 'video/webm' }));
-                hideProgress();
-                renderedPreviewVideo.src = finalRenderedBlobUrl; renderedPreviewVideo.load();
-                previewModal.classList.remove('hidden');
+                hideProgress(); renderedPreviewVideo.src = finalRenderedBlobUrl; renderedPreviewVideo.load(); previewModal.classList.remove('hidden');
             };
 
-            if (mainGainNode) mainGainNode.gain.value = muteOriginalAudioToggle.checked ? 0 : (parseFloat(duckVolume.value) / 100);
-
-            recorder.start();
-            coreVideo.currentTime = 0;
-            coreVideo.play();
-
-            const interval = setInterval(() => {
-                if (coreVideo.ended || coreVideo.paused) { clearInterval(interval); recorder.stop(); } 
-                else { triggerCanvasDraw(); }
-            }, 41);
+            recorder.start(); bufferSource.start(0); coreVideo.currentTime = 0; coreVideo.play();
+            const interval = setInterval(() => { if (coreVideo.ended || coreVideo.paused) { clearInterval(interval); recorder.stop(); } else { triggerCanvasDraw(); } }, 41);
         }
 
         function downloadFinalVideo() {
             if (!finalRenderedBlobUrl) return;
-            const link = document.createElement('a'); link.href = finalRenderedBlobUrl; link.download = `recap_fixed_studio.webm`;
+            const link = document.createElement('a'); link.href = finalRenderedBlobUrl; link.download = `gemini_recap_final_${presetSize.value}.webm`;
             document.body.appendChild(link); link.click(); document.body.removeChild(link); previewModal.classList.add('hidden');
         }
 
